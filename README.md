@@ -1,6 +1,8 @@
 # Soundcloud Grid
 
-Soundcloud API-based application that plays tracks, searches content, and creates playlists. This is a work-in-progress.
+*This is a work-in-progress*
+
+Soundcloud API-based application that plays tracks, searches content, and creates playlists.
 
 ### Todo
 
