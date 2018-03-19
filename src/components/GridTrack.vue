@@ -7,21 +7,17 @@
     :data-track-url="permalink_url"
   >
     <img class="track-img" :src="artwork.src" :alt="artwork.alt" />
-    <button class="btn-action">
-      <icon name="soundcloud"></icon>
-      <icon name="stop"></icon>
-      <icon name="play"></icon>
-    </button>
+    <v-button type="action" icon="soundcloud" title="Open track page on SoundCloud"></v-button>
   </div>
 </template>
 
 <script>
-import Icon from './Icon'
+import Button from './Button'
 
 export default {
   name: 'GridTrack',
   components: {
-    Icon
+    'v-button': Button
   },
 
   data() {
