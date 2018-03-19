@@ -1,8 +1,8 @@
 <template>
-  <div :id="id" class="app-controls">
-    <v-button id="playlist-toggle" type="action" icon="playlist-play" title="Toggle playlist container"></v-button>
+  <nav id="primary-navigation" class="navbar">
+    <v-button id="playlist-toggle" theme="light" icon="playlist-play" title="Toggle playlist container"></v-button>
     <div class="filters-container">
-      <v-button id="filters-toggle" type="action" icon="settings" title="Select a filter"></v-button>
+      <v-button id="filters-toggle" theme="light" icon="settings" title="Select a filter"></v-button>
       <ul class="menu-filters" id="filters-list">
         <li class="menu-item" v-for="filter in filters" :key="filter.id">
           <a :data-filter-param="filter.param" href="#">{{filter.text}}</a>
@@ -12,9 +12,9 @@
     <div class="search-container">
       <label class="track-filter-label" for="filter-search">Search</label>
       <input class="track-filter-input" type="text" id="filter-search" placeholder="Enter a genre" data-filter-type="genre"/>
-      <v-button type="action" icon="magnify" :title="'Click to search by ' + selectedFilter">Search</v-button>
+      <v-button theme="primary" icon="magnify" :title="'Click to search by ' + selectedFilter">Search</v-button>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -28,7 +28,6 @@ export default {
   
   data() {
     return {
-      id: 'filters',
       selectedFilter: 'genre',
       filters: [
         { id: 1, text: "Genre", param: "genre" },
