@@ -3,7 +3,7 @@
     <navbar></navbar>
     <main class="view-container">
       <div class="view-overlay"></div>
-      <grid :tracks="tracks"></grid>
+      <grid :tracks="tracklist"></grid>
       <playlist :playlist="playlist"></playlist>
     </main>
     <player v-if="isPlaying" :currentTrack="currentTrack"></player>
@@ -30,7 +30,7 @@ export default {
       currentTrack: {},
       isPlaying: false,
       viewPlaylist: false,
-      tracks: [
+      tracklist: [
         {
           id: '12345',
           title: 'Test Title',
