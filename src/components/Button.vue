@@ -1,5 +1,11 @@
 <template>
-  <button :type=type class="btn" :class="{'btn-has-icon': icon}">
+  <button 
+    class="btn"
+    :class="{'btn-has-icon': icon}"
+    :theme=theme
+    :title=title
+    :aria-label=title
+  >
     <icon v-if=icon :name=icon></icon>
     <slot></slot>
   </button>
@@ -13,7 +19,7 @@ export default {
   components: {
     Icon
   },
-  props: ['type', 'icon']
+  props: ['theme', 'icon', 'title']
 }
 </script>
 

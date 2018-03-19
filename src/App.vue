@@ -1,19 +1,20 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{'viewing-playlist' : viewPlaylist}">
     <grid-filters></grid-filters>
-    <grid :tracks="tracks"></grid>
-    <playlist :playlist="playlist"></playlist>
+    <main class="view-container">
+      <div class="view-overlay"></div>
+      <grid :tracks="tracks"></grid>
+      <playlist :playlist="playlist"></playlist>
+    </main>
+    <player v-if="isPlaying" :currentTrack="currentTrack"></player>    
   </div>
 </template>
 
 <script>
 import Grid from './components/Grid'
 import GridFilters from './components/GridFilters'
-import GridTrack from './components/GridTrack'
 import Playlist from './components/Playlist'
-import PlaylistTrack from './components/PlaylistTrack'
 import Player from './components/Player'
-
 
 export default {
   name: 'App',
@@ -26,6 +27,9 @@ export default {
 
   data() {
     return {
+      currentTrack: {},
+      isPlaying: false,
+      viewPlaylist: false,
       tracks: [
         {
           id: '12345',
