@@ -1,11 +1,14 @@
 <template>
   <div id="app">
+    <grid-filters></grid-filters>
     <grid></grid>
+    <playlist></playlist>
   </div>
 </template>
 
 <script>
 import Grid from './components/Grid'
+import GridFilters from './components/GridFilters'
 import GridTrack from './components/GridTrack'
 import Playlist from './components/Playlist'
 import PlaylistTrack from './components/PlaylistTrack'
@@ -16,6 +19,7 @@ export default {
   name: 'App',
   components: {
     Grid,
+    GridFilters,
     Playlist,
     Player
   },
