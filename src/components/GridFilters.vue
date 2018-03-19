@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" class="grid-filters">
+  <div :id="id" class="app-controls">
     <v-button id="playlist-toggle" type="action" icon="playlist-play" title="Toggle playlist container"></v-button>
     <div class="filters-container">
       <v-button id="filters-toggle" type="action" icon="settings" title="Select a filter"></v-button>
@@ -9,9 +9,11 @@
         </li>
       </ul>
     </div>
-    <label class="track-filter-label" for="filter-search">Search</label>
-    <input class="track-filter-input" type="text" id="filter-search" placeholder="Enter a genre" data-filter-type="genre"/>
-    <v-button type="action" icon="magnify" title="Click to search">Search</v-button>
+    <div class="search-container">
+      <label class="track-filter-label" for="filter-search">Search</label>
+      <input class="track-filter-input" type="text" id="filter-search" placeholder="Enter a genre" data-filter-type="genre"/>
+      <v-button type="action" icon="magnify" :title="'Click to search by ' + selectedFilter">Search</v-button>
+    </div>
   </div>
 </template>
 
@@ -27,6 +29,7 @@ export default {
   data() {
     return {
       id: 'filters',
+      selectedFilter: 'genre',
       filters: [
         { id: 1, text: "Genre", param: "genre" },
         { id: 2, text: "Username", param: "user" },

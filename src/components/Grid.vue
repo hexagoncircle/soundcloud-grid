@@ -13,6 +13,7 @@ export default {
   components: {
     GridTrack
   },
+  props: ['tracks'],
 
   data() {
     return {
