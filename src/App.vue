@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <grid-filters></grid-filters>
-    <grid></grid>
-    <playlist></playlist>
+    <grid :tracks="tracks"></grid>
+    <playlist :playlist="playlist"></playlist>
   </div>
 </template>
 
@@ -26,10 +26,60 @@ export default {
 
   data() {
     return {
-      tracks: [],
+      tracks: [
+        {
+          id: '12345',
+          title: 'Test Title',
+          user: {
+            username: 'User'
+          },
+          permalink_url: 'http://hexagoncircle.com',
+          artwork: {
+            alt: 'Album art for Test Title',
+            src: 'http://via.placeholder.com/250x250'
+          }
+        },
+        {
+          id: '33434',
+          title: 'Another Track',
+          user: {
+            username: 'Dat Hot User Name'
+          },
+          permalink_url: 'http://hexagoncircle.com',
+          artwork: {
+            alt: 'Album art for Another Track',
+            src: 'http://via.placeholder.com/250x250'
+          }
+        }
+      ],
       playlist: {
-        name: 'Current Playlist',
-        tracks: []
+        title: 'Current Playlist',
+        tracks: [
+          {
+            id: '12345',
+            title: 'Test Title',
+            user: {
+              username: 'User'
+            },
+            permalink_url: 'http://hexagoncircle.com',
+            artwork: {
+              alt: 'Album art for Test Title',
+              src: 'http://via.placeholder.com/250x250'
+            }
+          },
+          {
+            id: '33434',
+            title: 'Another Track',
+            user: {
+              username: 'Dat Hot User Name'
+            },
+            permalink_url: 'http://hexagoncircle.com',
+            artwork: {
+              alt: 'Album art for Another Track',
+              src: 'http://via.placeholder.com/250x250'
+            }
+          }
+        ]
       }
     }
   }
