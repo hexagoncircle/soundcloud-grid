@@ -1,12 +1,17 @@
 <template>
   <div
+    class="track"
     :data-track-id="id"
     :data-title="title"
     :data-username="user.username"
     :data-track-url="permalink_url"
-    class="track">
+  >
     <img class="track-img" :src="artwork.src" :alt="artwork.alt" />
-    <button class="btn-action">Button action</button>
+    <button class="btn-action">
+      <icon name="soundcloud"></icon>
+      <icon name="stop"></icon>
+      <icon name="play"></icon>
+    </button>
   </div>
 </template>
 
