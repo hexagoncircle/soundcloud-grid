@@ -1,12 +1,12 @@
 <template>
   <div
     class="track"
-    :data-track-id="id"
-    :data-title="title"
-    :data-username="user.username"
-    :data-track-url="permalink_url"
+    :data-track-id="track.id"
+    :data-title="track.title"
+    :data-username="track.user.username"
+    :data-track-url="track.permalink_url"
   >
-    <img class="track-img" :src="artwork.src" :alt="artwork.alt" />
+    <img class="track-img" :src="track.artwork.src" :alt="track.artwork.alt" />
     <v-button type="action" icon="soundcloud" title="Open track page on SoundCloud"></v-button>
   </div>
 </template>
@@ -19,21 +19,7 @@ export default {
   components: {
     'v-button': Button
   },
-
-  data() {
-    return {
-      id: '12345',
-      title: 'Test Title',
-      user: {
-        username: 'User'
-      },
-      permalink_url: 'http://hexagoncircle.com',
-      artwork: {
-        alt: 'Album art for Test Title',
-        src: 'http://via.placeholder.com/250x250'
-      },
-    }
-  }
+  props: ['track']
 }
 </script>
 

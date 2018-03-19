@@ -1,7 +1,7 @@
 <template>
   <div :id="id" class="track-grid">
     <h1>Track Grid</h1>
-    <grid-track></grid-track>
+    <grid-track v-for="track in tracks" :key="track.id" :track="track"></grid-track>
   </div>
 </template>
 
