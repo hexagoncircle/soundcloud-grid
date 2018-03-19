@@ -8,9 +8,9 @@ import PlaylistTrack from './PlaylistTrack'
 export default {
   name: 'Playlist',
   components: {
-    PlaylistTrack,
-
-  }
+    PlaylistTrack
+  },
+  props: ['playlist']
 }
 </script>
 
