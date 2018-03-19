@@ -1,8 +1,8 @@
 <template>
-  <div :id="id" class="track-grid">
+  <section id="grid" class="track-grid">
     <h1>Track Grid</h1>
     <grid-track v-for="track in tracks" :key="track.id" :track="track"></grid-track>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -13,13 +13,7 @@ export default {
   components: {
     GridTrack
   },
-  props: ['tracks'],
-
-  data() {
-    return {
-      id: 'grid'
-    }
-  }
+  props: ['tracks']
 }
 </script>
 
