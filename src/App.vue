@@ -84,7 +84,33 @@ export default {
             }
           }
         ]
+      },
+      options: {
+        limit: 100,
+        kind: 'trending'
       }
+    }
+  },
+
+  mounted() {
+
+  },
+
+  methods: {
+    fetchTracks(val) {
+      let type = input.getAttribute(dataFilterType);
+
+      type === 'genre' ? this.options.genres = val : this.options.q = val;
+
+      SC.get('/tracks', this.options).then(function(results) {
+        if (results.length > 0) {
+          // appendTracks(results);
+        } else {
+          // grid.innerHTML = noResultsTpl(val);
+        }
+      }).catch(function(error) {
+        console.log(error);
+      });
     }
   }
 }
