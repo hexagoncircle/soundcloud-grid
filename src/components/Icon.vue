@@ -1,5 +1,8 @@
 <template>
-  <img class="icon" :name="name" :src="require(`../assets/icons/${name}.svg`)" />
+  <img
+    :class="`icon icon-${name}`"
+    :src="require(`../assets/icons/${name}.svg`)"
+  />
 </template>
 
 <script>
@@ -8,7 +11,3 @@ export default {
   props: ['name']
 }
 </script>
-
-<style>
-
-</style>
