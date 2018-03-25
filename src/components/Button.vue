@@ -1,7 +1,7 @@
 <template>
   <button 
     class="btn"
-    :class="{'btn-has-icon': icon}"
+    :class="[`btn-${theme}`, icon ? 'btn-has-icon' : '']"
     :theme=theme
     :title=title
     :aria-label=title
