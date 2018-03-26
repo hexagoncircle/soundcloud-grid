@@ -46,7 +46,8 @@ export default {
     // SC.initialize({
     //   client_id: SC_CLIENT_ID
     // });
-    // this.fetchTracks('rap');    
+    // this.fetchTracks('rap');   
+  },
 
   methods: {
     fetchTracks(val) {
