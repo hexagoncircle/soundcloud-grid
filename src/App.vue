@@ -3,14 +3,10 @@
     <navbar></navbar>
     <main class="view-container">
       <div class="view-overlay"></div>
-      <grid
-        :tracks="tracklist"
-        :currentTrack="currentTrack"
-        @selected="setSelectedTrack"
-      ></grid>
-      <playlist :playlist="playlist" :currentTrack="currentTrack"></playlist>
+      <grid></grid>
+      <playlist></playlist>
     </main>
-    <player v-if="isPlaying" :currentTrack="currentTrack"></player>
+    <player v-if="isPlaying"></player>
   </div>
 </template>
 
@@ -31,26 +27,26 @@ export default {
 
   data() {
     return {
-      currentTrack: {},
       viewPlaylist: false,
-      isPlaying: false,
-      tracklist: [],
-      playlist: {
-        title: 'Current Playlist',
-        tracks: []
-      },
-      options: {
-        limit: 10,
-        kind: 'trending'
-      }
+      isPlaying: false
     }
   },
 
+  computed: {
+    tracks() {
+      return this.$store.state.tracklist;
+    }
+  },
+
+  created() {
+    this.$store.commit('optimizeTrackImages', this.$store.state.tracklist);
+  },
+
   mounted() {
-    SC.initialize({
-      client_id: 'c92343835f607734d719d94afcb679d7'
-    });
-    this.fetchTracks('rap');
+    // SC.initialize({
+    //   client_id: 'c92343835f607734d719d94afcb679d7'
+    // });
+    // this.fetchTracks('rap');    
   },
 
   methods: {
@@ -62,29 +58,12 @@ export default {
       SC.get('/tracks', this.options).then(results => {
         if (results.length > 0) {
           this.tracklist = results;
-          this.checkTrackImage();
         } else {
           // grid.innerHTML = noResultsTpl(val);
         }
       }).catch(function(error) {
         console.log(error);
       });
-    },
-
-    checkTrackImage() {
-      this.tracklist.forEach(track => {        
-        if (track.artwork_url === null) {
-          track.artwork_url = track.user.avatar_url.replace('large', 't500x500');
-        } else {
-          track.artwork_url = track.artwork_url.replace('large', 't500x500');
-        }
-      });
-    },
-    
-    setSelectedTrack(selectedTrack) {
-      this.currentTrack = selectedTrack;
-      console.log('current track: ' + this.currentTrack.title);
-      console.log('selected track: ' + selectedTrack.title);
     }
   }
 }
@@ -878,5 +857,17 @@ p {
 // ================================================
 .is-hidden {
   display: none;
+}
+
+.track-enter-active,
+.track-leave-active {
+  transition: 
+    transform 0.4s 0.2s $transTimeFuncEase,
+    opacity 0.4s 0.2s $transTimeFuncEase;
+}
+.track-enter,
+.track-leave-to {
+  transform: scale(0.5);
+  opacity: 0;
 }
 </style>

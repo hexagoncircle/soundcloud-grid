@@ -1,24 +1,28 @@
 <template>
-  <div
-    :class="`track ${gridSpan} ${isPlaying ? 'is-playing' : ''}`"
-    :data-track-id="track.id"
-    :data-title="track.title"
-    :data-username="track.user.username"
-    :data-track-url="track.permalink_url"
-  >
-    <img
-      @error="setPlaceholder($event)"
-      class="track-img"
-      :src="track.artwork_url"
-      :alt="`Album art for ${track.title}`"
-    />
-    <v-button
-      @click.native="setSelectedTrack"
-      theme="overlay"
-      icon="stop"
-      :title="isPlaying ? 'Play track' : 'Stop playback'"
-    ></v-button>
-  </div>
+  <transition name="track">
+    <div
+      v-show="showElement"
+      :class="`track ${gridSpan} ${track.isPlaying ? 'is-playing' : ''}`"
+      :data-track-id="track.id"
+      :data-title="track.title"
+      :data-username="track.user.username"
+      :data-track-url="track.permalink_url"
+    >
+      <img
+        @error="setPlaceholder($event)"
+        @load="imageLoaded()"
+        class="track-img"
+        :src="track.artwork_url"
+        :alt="`Album art for ${track.title}`"
+      />
+      <v-button
+        @click.native="selectTrack"
+        theme="overlay"
+        icon="stop"
+        :title="track.isPlaying ? 'Play track' : 'Stop playback'"
+      ></v-button>
+    </div>
+  </transition>  
 </template>
 
 <script>
@@ -30,20 +34,22 @@ export default {
   components: {
     'v-button': Button
   },
-  props: ['track', 'playback'],
+  props: ['track'],
   mixins: [placeholder],
 
   data() {
     return {
-      isPlaying: this.playback,
-      size: ''
+      showElement: false
     }
   },
   
   methods: {
-    setSelectedTrack() {
-      this.isPlaying = !this.isPlaying;
-      this.$emit('selected', this.track);
+    selectTrack() {
+      this.$store.commit('setCurrentTrack', this.track);      
+    },
+    
+    imageLoaded() {
+      this.showElement = true;
     }
   },
 
@@ -51,10 +57,6 @@ export default {
     gridSpan() {
       return 'span-' + Math.floor(Math.random() * 2 + 1);
     }
-  },
-
-  created() {
-    this.size = this.randomSize();
   }
 }
 </script>

@@ -1,12 +1,6 @@
 <template>
   <section id="grid" class="track-grid">
-    <grid-track
-      v-for="track in tracks"
-      :key="track.id"
-      :track="track"
-      :playback="isPlaying"
-      @selected="setSelectedTrack"
-    ></grid-track>
+    <grid-track v-for="track in tracks" :key="track.id" :track="track"></grid-track>
   </section>
 </template>
 
@@ -18,20 +12,10 @@ export default {
   components: {
     GridTrack
   },
-  props: ['tracks'],
 
-  data() {
-    return {
-      isPlaying: false
-    }
-  },
-
-  methods: {
-    setSelectedTrack(selectedTrack) {
-      this.$emit('selected', selectedTrack);
-      this.tracks.forEach(track => {
-        track === selectedTrack ? track.isPlaying : !track.isPlaying;
-      });
+  computed: {
+    tracks() {
+      return this.$store.state.tracklist;
     }
   }
 }
