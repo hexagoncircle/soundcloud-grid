@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import { store } from './store'
 import placeholder from './assets/images/track-placeholder.png'
+import './assets/scss/core.scss'
 
 Vue.config.productionTip = false
 Vue.prototype.$appName = 'Soundcloud Grid'

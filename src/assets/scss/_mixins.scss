@@ -1,0 +1,47 @@
+// ================================================
+// Mixins
+// ================================================
+@mixin visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px; 
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+@mixin hide-element {
+  position: fixed;
+  top: 100%;
+  opacity: 0;
+}
+
+@mixin show-element {
+  position: relative;
+  top: auto;
+  opacity: 1;
+}
+
+@mixin track-foundation($size) {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: $size;
+  background-color: $darkgray;
+  background-image:
+    linear-gradient(45deg,
+      $darkgray,
+      $darkgray 50%,
+      $darkgraytint 50%,
+      $darkgraytint
+    );
+  border-radius: $baseBorderRadius;
+}
+
+@mixin btn-colors($color, $bg, $hColor: $color, $hBg: $bg) {
+  color: $color;
+  background-color: $bg;
+  
+  &:hover {
+    color: $hColor;
+    background-color: darken($hBg, 10%);
+  }
+}

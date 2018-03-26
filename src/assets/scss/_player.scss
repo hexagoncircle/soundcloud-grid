@@ -1,0 +1,150 @@
+// ================================================
+// Track Info
+// ================================================
+.player-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  bottom: $basePadding - $gridGap;
+  width: calc(100% - (#{$basePadding} * 2));
+  padding: $basePadding;
+  margin: 0 $basePadding;
+  background-color: $containerBgColor;
+  border-radius: $baseBorderRadius;
+  z-index: 500;
+  opacity: 0;
+  transform: translateY(calc(100% + (#{$playerImageSize} / 2) + #{$basePadding}));
+  transition: 
+    opacity 0s $baseTransSpeed,
+    transform $baseTransSpeed $transTimeFuncBounce;
+  
+  @media (min-width: $bpMd) {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  &.is-showing {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform $baseTransSpeed 0.1s $transTimeFuncEase;
+  }
+}
+
+.track-info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  
+  .player-container & {
+    margin-bottom: $basePadding;
+  
+    @media (min-width: $bpMd) {
+      margin-bottom: 0;
+    } 
+  }
+  
+  .playlist-item & {
+    flex: 1;
+    margin-bottom: 0;
+    
+    @media (min-width: $bpSm) {
+      padding-left: $basePadding;
+      transform: translateX(#{-$basePadding});
+      transition: transform ($baseTransSpeed / 2) ease-out;
+    } 
+  }
+  
+  .playlist-item:hover & {
+    transform: translateX(0);
+  }
+}
+  
+.track-info-img {
+  @include track-foundation($playerImageSizeSm);
+  
+  .player-container & {
+    @media (min-width: $bpSm) {
+      position: absolute;
+      bottom: 0;
+      margin-top: -$playerImageSize / 2;
+      max-width: $playerImageSize;
+      box-shadow: rgba(black, 0.2) 0 4px 12px; 
+    }
+  }
+  
+  .playlist-item & {
+    width: 36px;
+  }
+}
+
+.track-info-text {
+  flex: 1;
+  min-width: 0;
+  margin-left: $basePadding;
+  
+  > * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .player-container & {
+    @media (min-width: $bpSm) {
+      margin-left: $playerImageSize + $basePadding;
+    }
+  }
+}
+
+.track-info-title {
+  display: block;
+  margin-right: 2px;
+  margin-bottom: 4px;
+  font-size: 1.2em;
+  line-height: 1.2;
+  color: white;
+  
+  .playlist-item & {
+    font-size: 1em;
+  }
+}
+
+.track-info-username {
+  display: block;
+  font-size: 0.8em;
+  line-height: 1.2;
+  color: lightgray;
+}
+
+.track-controls {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  
+  @media (min-width: $bpMd) {
+    margin-left: $basePadding;
+  }
+  
+  .player-container & {
+    .btn-has-icon [class^='icon-'] {
+      width: 30px;
+    }
+  }
+  
+  .playlist-item & {
+    opacity: 0;
+    transform: translateX(#{-$basePadding});
+    transition: 
+      opacity ($baseTransSpeed / 2) ease-out,
+      transform ($baseTransSpeed / 2) ease-out;
+  }
+  
+  .playlist-item:hover & {
+    opacity: 1;
+    transform: translateX(0);
+    transition: 
+      opacity ($baseTransSpeed / 2) ($baseTransSpeed / 2) ease-out,
+      transform ($baseTransSpeed / 2) ($baseTransSpeed / 2) ease-out;
+  }
+}

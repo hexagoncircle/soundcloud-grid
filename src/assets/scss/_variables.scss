@@ -1,0 +1,30 @@
+// ================================================
+// Variables
+// ================================================
+@import url('https://fonts.googleapis.com/css?family=Lato:400,900');
+$baseFont: 'Lato', serif;
+$bpSm: 500px;
+$bpMd: 650px;
+$bpLg: 800px;
+$basePaddingSm: 6px;
+$basePadding: 12px;
+$basePaddingLg: 18px;
+$baseBorderRadius: 2px;
+$baseFontSize: 1em;
+$baseTransSpeed: 0.4s;
+$gridGap: 6px;
+$transTimeFuncEase: cubic-bezier(0.23, 1, 0.32, 1);
+$transTimeFuncBounce: cubic-bezier(0.68, -0.25, 0.265, 1.55);
+
+$gridImageSize: 500px;
+$playerImageSize: 100px;
+$playerImageSizeSm: 54px;
+
+$blue: #46A7D9;
+$shade: #0F0F0F;
+$darkgray: #3d3d3d;
+$darkgraytint: darken($darkgray, 2%);
+$lightgray: #ededed;
+$gray: gainsboro;
+$orange: #ff7700;
+$containerBgColor: rgba($shade, 0.9);

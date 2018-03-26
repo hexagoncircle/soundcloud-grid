@@ -1,0 +1,203 @@
+// ================================================
+// Track Grid
+// ================================================
+.track-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-auto-flow: dense;
+  grid-gap: $gridGap;
+  padding: 0 $gridGap $gridGap;
+  width: 100%;
+  transform: translateX(0);
+  transition: 
+    opacity ($baseTransSpeed * 2) $transTimeFuncEase,
+    transform ($baseTransSpeed * 2) $transTimeFuncEase;
+  
+  @media (min-width: $bpMd) {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    
+    .span-2 {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+  
+  &:hover {
+    @media (hover: hover) {
+       .track {
+          opacity: 0.6;
+       }
+    }
+
+    .track:hover,
+    .track.is-playing {
+      opacity: 1;
+    } 
+  }
+  
+  .view-playlist & {
+    opacity: 0.2;
+    transform: translateX(25%);
+  }
+}
+
+.view-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  .view-playlist & {
+    z-index: 100;
+  }
+}
+
+// ================================================
+// Track Element
+// ================================================
+.track {
+  @include track-foundation($gridImageSize);
+  grid-column: span 1;
+  grid-row: span 1;
+  z-index: 1;
+  opacity: 1;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  transition: 
+    opacity ($baseTransSpeed * 1.5) ease-out,
+    transform $baseTransSpeed $transTimeFuncBounce;
+  
+  &.is-loading {
+    opacity: 0;
+  }
+  
+  &.has-error {
+    background-image: repeating-linear-gradient(
+      45deg,
+      $darkgray,
+      $darkgray 5px,
+      $darkgraytint 5px,
+      $darkgraytint 10px
+    );
+
+    img {
+      opacity: 0.1 !important;
+      transition: opacity ($baseTransSpeed / 2) ease-out;
+    }
+    
+    &:after {
+      content: 'Cannot load track';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5em;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      text-shadow: rgba(black, 0.2) 1px 1px 0;
+      color: white;
+    }
+  }
+  
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Track states
+.track {
+  &:hover,
+  &:focus {
+    z-index: 2;
+    transition: 
+      opacity 0.2s ease-out,
+      transform 0.3s $transTimeFuncBounce;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+    transition: transform 0s;
+  }
+}
+
+// Track actions
+.btn-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color ($baseTransSpeed / 2) ease-out;
+  
+  [class*='icon'] {
+    @include hide-element;
+    color: white;
+  }
+  
+  .icon-play {
+    $size: 30px;
+    padding: 2px;
+    width: $size;
+    height: $size;
+    background-color: rgba($shade, 0.8);
+    border-radius: 100%;
+  }
+  
+  .icon-pause,
+  .icon-stop {
+    width: 50%;
+    height: 50%;
+    opacity: 0;
+    transform: scale(0.1) translateY(6px);
+    transition: 
+      opacity $baseTransSpeed 0.15s ease-out,
+      transform $baseTransSpeed $transTimeFuncBounce;
+  }
+}
+
+// Track playing
+.track.is-playing {
+  transform: scale(1.1);
+  box-shadow: rgba(black, 0.4) 0 2px 12px 6px;
+  border: none;
+  z-index: 3;
+  opacity: 1;
+  
+  &:active {
+    transform: scale(1.08);
+    transition: transform 0s;
+  }
+  
+  .btn-overlay {
+    opacity: 1;
+    background-color: rgba($orange, 0.8);
+  }
+  
+  .icon-play {
+    @include hide-element;
+  }
+  
+  .icon-pause,
+  .icon-stop {
+    @include show-element;
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

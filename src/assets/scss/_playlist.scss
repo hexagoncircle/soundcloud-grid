@@ -1,0 +1,67 @@
+// ================================================
+// Track Playlist
+// ================================================
+.playlist-container {
+  position: fixed;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+  background-color: black;
+  border-radius: $baseBorderRadius;
+  z-index: 200;
+  transform: translateX(-100%);
+  transition: transform ($baseTransSpeed * 1.5) $transTimeFuncEase;
+  
+  .view-playlist & {
+    transform: translateX(0);
+    transition: transform $baseTransSpeed $transTimeFuncEase;
+  }
+}
+
+.playlist-content {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 60px;
+  padding: $basePadding 0 120px;
+}
+
+.playlist-label {
+  padding: 0 $basePadding;
+}
+
+.playlist {
+  list-style: none;
+  margin-left: 0;
+  width: 100%;
+}
+
+.playlist-item {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  padding: $basePadding;
+  transition: background-color 0.2s ease-out;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: linear-gradient(to right, $shade, $shade 50%, transparent);
+    transform: translateX(-100%);
+    transition: transform $baseTransSpeed ease-out;
+    z-index: -1;
+  }
+  
+  &:hover {
+    &:before {
+      transform: translateX(0);
+    }
+  }
+}
