@@ -21,7 +21,12 @@ export default {
   components: {
     PlaylistTrack
   },
-  props: ['playlist']
+  
+  computed: {
+    playlist() {
+      return this.$store.state.playlist;
+    }
+  },
 }
 </script>
 
