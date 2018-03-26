@@ -15,6 +15,7 @@ import Grid from './components/Grid'
 import Navbar from './components/Navbar'
 import Playlist from './components/Playlist'
 import Player from './components/Player'
+import config from '../app-config'
 
 export default {
   name: 'App',
@@ -44,7 +45,7 @@ export default {
 
   mounted() {
     // SC.initialize({
-    //   client_id: SC_CLIENT_ID
+    //   client_id: config.SC_CLIENT_ID
     // });
     // this.fetchTracks('rap');   
   },
