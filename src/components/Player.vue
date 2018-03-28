@@ -8,20 +8,35 @@
       </div>
     </div>
     <div class="track-controls">
-      <v-button theme="dark" icon="stop" title="Stop playback of the current track"></v-button>
-      <v-button theme="dark" icon="playlist-plus" title="Add this track to the playlist"></v-button>
-      <v-button theme="dark" icon="soundcloud" title="Open this track page on SoundCloud"></v-button>
+      <v-button theme="dark" :title="track.isPlaying ? 'Play track' : 'Stop playback'">
+        <stop-icon v-if="track.isPlaying"></stop-icon>        
+        <play-icon v-else></play-icon>        
+      </v-button>
+      <v-button theme="dark" title="Add this track to the playlist">
+        <playlist-add-icon></playlist-add-icon>
+      </v-button>
+      <v-button theme="dark" title="Open this track page on SoundCloud">
+        <soundcloud-icon></soundcloud-icon>
+      </v-button>
     </div>
   </div>
 </template>
 
 <script>
 import Button from './Button'
+import PlayIcon from 'vue-material-design-icons/play-circle-outline'
+import PlaylistAddIcon from 'vue-material-design-icons/playlist-plus'
+import SoundcloudIcon from 'vue-material-design-icons/soundcloud'
+import StopIcon from 'vue-material-design-icons/stop-circle-outline'
 
 export default {
   name: 'Player',
   components: {
-    'v-button': Button
+    'v-button': Button,
+    PlayIcon,
+    PlaylistAddIcon,
+    SoundcloudIcon,
+    StopIcon
   },
   props: ['currentTrack']
 }

@@ -15,24 +15,23 @@
         :src="track.artwork_url"
         :alt="`Album art for ${track.title}`"
       />
-      <v-button
-        @click.native="selectTrack"
-        theme="overlay"
-        icon="stop"
-        :title="track.isPlaying ? 'Play track' : 'Stop playback'"
-      ></v-button>
+      <v-button @click.native="selectTrack" theme="overlay" :title="track.isPlaying ? 'Play track' : 'Stop playback'">
+        <stop-icon></stop-icon>        
+      </v-button>
     </div>
   </transition>  
 </template>
 
 <script>
 import Button from './Button'
+import StopIcon from 'vue-material-design-icons/stop-circle-outline'
 import { placeholder } from './mixins/placeholder'
 
 export default {
   name: 'GridTrack',
   components: {
-    'v-button': Button
+    'v-button': Button,
+    StopIcon
   },
   props: ['track'],
   mixins: [placeholder],

@@ -129,46 +129,17 @@
     transform: scale(0.98);
     transition: transform 0s;
   }
-}
 
-// Track actions
-.btn-overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition: background-color ($baseTransSpeed / 2) ease-out;
-  
-  [class*='icon'] {
-    @include hide-element;
-    color: white;
-  }
-  
-  .icon-play {
-    $size: 30px;
-    padding: 2px;
-    width: $size;
-    height: $size;
-    background-color: rgba($shade, 0.8);
-    border-radius: 100%;
-  }
-  
-  .icon-pause,
-  .icon-stop {
-    width: 50%;
-    height: 50%;
-    opacity: 0;
-    transform: scale(0.1) translateY(6px);
-    transition: 
-      opacity $baseTransSpeed 0.15s ease-out,
-      transform $baseTransSpeed $transTimeFuncBounce;
+  .btn-overlay {
+    transition: background-color ($baseTransSpeed / 2) ease-out;
+
+    .material-design-icon {
+      opacity: 0;
+      transform: scale(0.1) translateY(6px);
+      transition: 
+        opacity $baseTransSpeed/2 ease-out,
+        transform $baseTransSpeed $transTimeFuncBounce;
+    }
   }
 }
 
@@ -184,20 +155,17 @@
     transform: scale(1.08);
     transition: transform 0s;
   }
-  
+
   .btn-overlay {
     opacity: 1;
     background-color: rgba($orange, 0.8);
   }
   
-  .icon-play {
-    @include hide-element;
-  }
-  
-  .icon-pause,
-  .icon-stop {
-    @include show-element;
+  .material-design-icon {
     opacity: 1;
     transform: scale(1) translateY(0);
+    transition: 
+        opacity $baseTransSpeed 0.15s ease-out,
+        transform $baseTransSpeed $transTimeFuncBounce;
   }
 }

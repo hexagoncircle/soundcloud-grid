@@ -126,12 +126,6 @@
     margin-left: $basePadding;
   }
   
-  .player-container & {
-    .btn-has-icon [class^='icon-'] {
-      width: 30px;
-    }
-  }
-  
   .playlist-item & {
     opacity: 0;
     transform: translateX(#{-$basePadding});
