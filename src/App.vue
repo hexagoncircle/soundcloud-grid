@@ -1,12 +1,12 @@
 <template>
   <div id="app" :class="{'viewing-playlist' : viewPlaylist}">
-    <navbar />
+    <navbar></navbar>
     <main class="view-container">
       <div @click="closePlaylist" class="view-overlay"></div>
-      <grid />
-      <playlist />
+      <grid></grid>
+      <playlist></playlist>
     </main>
-    <player />
+    <player></player>
   </div>
 </template>
 
@@ -26,12 +26,6 @@ export default {
     Player
   },
 
-  computed: {
-    viewPlaylist() {
-      return this.$store.state.view_playlist;
-    }
-  },
-
   methods: {
     closePlaylist() {
       this.$store.state.view_playlist = false;
@@ -41,6 +35,12 @@ export default {
       SC.initialize({
         client_id: config.SC_CLIENT_ID
       });
+    }
+  },
+
+  computed: {
+    viewPlaylist() {
+      return this.$store.state.view_playlist;
     }
   },
 

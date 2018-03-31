@@ -15,18 +15,17 @@
       <v-button @click.native="removeFromPlaylist" theme="dark" title="Remove this track from the playlist">
         <playlist-remove-icon></playlist-remove-icon>
       </v-button>
-      <v-button @click.native="stopTrack" theme="dark" title="Open this track on SoundCloud">
-        <a :href="track.permalink_url" target="_blank">
-          <soundcloud-icon></soundcloud-icon>
-        </a>
-      </v-button>
+      <v-link @click.native="stopTrack" :href="track.permalink_url" target="_blank" theme="dark" title="Open this track on SoundCloud">
+        <soundcloud-icon></soundcloud-icon>
+      </v-link>
     </div>
   </li>
 </template>
 
 <script>
 import Button from './Button'
-import PlayIcon from 'vue-material-design-icons/play-circle-outline'
+import Link from './ButtonLink'
+import PlayIcon from 'vue-material-design-icons/play'
 import PlaylistRemoveIcon from 'vue-material-design-icons/playlist-remove'
 import SoundcloudIcon from 'vue-material-design-icons/soundcloud'
 import StopIcon from 'vue-material-design-icons/stop-circle-outline'
@@ -35,6 +34,7 @@ export default {
   name: 'PlaylistTrack',
   components: {
     'v-button': Button,
+    'v-link': Link,
     PlayIcon,
     PlaylistRemoveIcon,
     SoundcloudIcon,
