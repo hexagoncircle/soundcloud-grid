@@ -1,22 +1,62 @@
 <template>
   <nav id="app-controls" class="navbar">
-    <v-button id="playlist-toggle" theme="light" title="Toggle playlist container">
+    <v-button
+      @click.native="togglePlaylist"
+      id="playlist-toggle"
+      theme="light"
+      :title="viewPlaylist ? 'Hide playlist' : 'Show playlist'"
+    >
       <playlist-play-icon></playlist-play-icon>
+      <grid-icon></grid-icon>
     </v-button>
     <div class="filters-container">
-      <v-button id="filters-toggle" theme="light" title="Select a filter">
+      <v-button
+        @click.native="toggleFiltersMenu"
+        :class="{'is-active' : show_filters}"
+        id="filters-toggle"
+        theme="light"
+        title="Select a filter"
+      >
         <settings-icon></settings-icon>
       </v-button>
-      <ul class="menu-filters" id="filters-list">
-        <li class="menu-item" v-for="filter in filters" :key="filter.id">
-          <a :data-filter-param="filter.param" href="#">{{filter.text}}</a>
-        </li>
-      </ul>
+      <transition name="filters-menu">
+        <ul
+          v-if="show_filters"
+          v-click-outside="closeFiltersMenu"
+          class="menu-filters"
+          id="filters-list"
+        >
+          <li class="menu-item" v-for="filter in filters" :key="filter.id">
+            <a
+              @click="selectFilter($event, filter.param)"
+              :data-filter-param="filter.param"
+              class="menu-item-link"              
+              href="#"
+            >
+              {{filter.text}}
+            </a>
+          </li>
+        </ul>
+      </transition>
     </div>
     <div class="search-container">
-      <label class="track-filter-label" for="filter-search">Search</label>
-      <input class="track-filter-input" type="text" id="filter-search" placeholder="Enter a genre" data-filter-type="genre" />
-      <v-button theme="primary" :title="'Click to search by ' + selectedFilter">
+      <label class="track-filter-label" for="search-tracks">Search</label>
+      <input
+        @keyup.enter="searchTracks"
+        v-model="searchValue"
+        id="search-tracks"
+        ref="search"
+        class="track-filter-input"
+        type="text"
+        :placeholder="searchPlaceholder"
+        :data-filter-type="searchFilterType"
+      />
+      <v-button
+        @click.native="searchTracks"
+        theme="primary"
+        :disabled="!searchValue"
+        :title="searchValue ? 'Click to search for ' + searchValue : 'Enter a search value'"
+      >
         <magnify-icon></magnify-icon>
       </v-button>
     </div>
@@ -25,6 +65,7 @@
 
 <script>
 import Button from './Button'
+import GridIcon from 'vue-material-design-icons/view-grid'
 import MagnifyIcon from 'vue-material-design-icons/magnify'
 import PlaylistPlayIcon from 'vue-material-design-icons/playlist-play'
 import SettingsIcon from 'vue-material-design-icons/settings'
@@ -33,6 +74,7 @@ export default {
   name: 'Navbar',
   components: {
     'v-button': Button,
+    GridIcon,
     MagnifyIcon,
     PlaylistPlayIcon,
     SettingsIcon
@@ -40,17 +82,65 @@ export default {
 
   data() {
     return {
-      selectedFilter: 'genre',
+      selected_filter: 'genre',
+      show_filters: false,
       filters: [
         { id: 1, text: "Genre", param: "genre" },
         { id: 2, text: "Username", param: "user" },
         { id: 3, text: "Track Title", param: "title" }
       ]
     }
+  },
+
+  computed: {
+    searchFilterType() {
+      return this.$store.state.search.filter_type;
+    },
+
+    searchPlaceholder() {
+      return this.$store.state.search.placeholder;
+    },
+
+    searchValue: {
+      get() {
+        return this.$store.state.search.value;
+      },
+      set(value) {
+        this.$store.state.search.value = value;
+      }
+    },
+
+    viewPlaylist() {
+      return this.$store.state.view_playlist;
+    }
+  },
+
+  methods: {
+    toggleFiltersMenu() {
+      this.show_filters = !this.show_filters;
+    },
+
+    closeFiltersMenu() {
+      this.show_filters = false;
+    },
+
+    togglePlaylist() {
+      this.$store.state.view_playlist = !this.$store.state.view_playlist;
+    },
+
+    selectFilter(event, type) {
+      event.preventDefault();
+      this.$store.state.search.filterType = type;
+      this.$store.state.search.value = '';
+      this.$store.state.search.placeholder = `Enter a ${type}`;
+      this.$refs.search.focus();
+      this.selected_filter = type;
+      this.closeFiltersMenu();      
+    },
+
+    searchTracks() {
+      this.$store.dispatch('fetchTracks', this.$store.state.search.value);
+    }
   }
 }
 </script>
-
-<style>
-
-</style>

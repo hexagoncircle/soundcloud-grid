@@ -16,7 +16,7 @@
   transform: translateX(-100%);
   transition: transform ($baseTransSpeed * 1.5) $transTimeFuncEase;
   
-  .view-playlist & {
+  .viewing-playlist & {
     transform: translateX(0);
     transition: transform $baseTransSpeed $transTimeFuncEase;
   }
@@ -29,17 +29,18 @@
   padding: $basePadding 0 120px;
 }
 
-.playlist-label {
+.playlist-title {
   padding: 0 $basePadding;
 }
 
 .playlist {
   list-style: none;
   margin-left: 0;
+  padding-left: 0;
   width: 100%;
 }
 
-.playlist-item {
+.playlist-track {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -63,5 +64,11 @@
     &:before {
       transform: translateX(0);
     }
+  }
+
+  .track-image {
+    max-width: 36px;
+    width: 100%;
+    height: 100%;
   }
 }

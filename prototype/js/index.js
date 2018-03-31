@@ -303,7 +303,7 @@ const iconStop = `
 // Template town
 function createAlbumTpl(art, title) {
   return `
-    <img class="track-img" src="${art}" alt="Album art for ${title}" />
+    <img class="track-image" src="${art}" alt="Album art for ${title}" />
     <button class="btn-action">
       ${iconStop}
     </button>

@@ -22,7 +22,6 @@
 
 @mixin track-foundation($size) {
   position: relative;
-  overflow: hidden;
   width: 100%;
   max-width: $size;
   background-color: $darkgray;

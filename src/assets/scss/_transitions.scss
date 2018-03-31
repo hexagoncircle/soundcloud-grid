@@ -1,0 +1,56 @@
+// ================================================
+// Transitions
+// ================================================
+.track-enter-active,
+.track-leave-active {
+  transition: 
+    transform 0.4s 0.2s $transTimeFuncEase,
+    opacity 0.4s 0.2s $transTimeFuncEase;
+}
+.track-enter,
+.track-leave-to {
+  transform: scale(0.4);
+  opacity: 0;
+}
+
+.filters-menu-enter-active,
+.filters-menu-leave-active {
+  transition: 
+    transform 0.4s $transTimeFuncEase,
+    opacity 0.4s $transTimeFuncEase;
+}
+
+.filters-menu-enter,
+.filters-menu-leave-to {
+  transform: translateY(-6px);
+  opacity: 0;
+}
+
+.player-enter-active {
+  transition: transform $baseTransSpeed 0.1s $transTimeFuncEase;
+}
+
+.player-leave-active {
+  transition: 
+    opacity 0s $baseTransSpeed,
+    transform $baseTransSpeed $transTimeFuncBounce;
+}
+
+.player-enter,
+.player-leave-to {
+  opacity: 0;  
+  transform: translateY(calc(100% + (#{$playerImageSize} / 2) + #{$basePadding}));
+}
+
+.slide-down-fade-enter-active,
+.slide-down-fade-leave-active {
+  transition: 
+    transform 0.4s $transTimeFuncEase,
+    opacity 0.4s $transTimeFuncEase;
+}
+
+.slide-down-fade-enter,
+.slide-down-fade-leave-to {
+  transform: translateY(-6px);
+  opacity: 0;
+}

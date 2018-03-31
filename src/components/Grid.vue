@@ -1,6 +1,10 @@
 <template>
   <section id="grid" class="track-grid">
-    <grid-track v-for="track in tracks" :key="track.id" :track="track"></grid-track>
+    <grid-track v-for="track in tracks" :key="`grid-${track.id}`" :track="track" />
+    <div v-if="!tracks" class="empty-state-container">
+      <h3>There are no results.</h3>
+      <p>Check your spelling, simplify your search terms, or try searching for something else.</p>
+    </div>
   </section>
 </template>
 
@@ -16,11 +20,11 @@ export default {
   computed: {
     tracks() {
       return this.$store.state.tracklist;
-    }
+    },
+  },
+  
+  created() {
+    this.$store.dispatch('fetchTracks');
   }
 }
 </script>
-
-<style>
-
-</style>

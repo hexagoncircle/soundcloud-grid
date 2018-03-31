@@ -1,25 +1,24 @@
 <template>
-  <li
-    class="playlist-track"
-    :data-track-id="track.id"
-    :data-title="track.title"
-    :data-username="track.user.username"
-    :data-track-url="track.permalink_url"
-  >
-    <img class="track-img" :src="track.artwork.src" :alt="track.artwork.alt" />
+  <li class="playlist-track">
+    <img class="track-image" :src="track.artwork_url" :alt="track.title" />
     <div class="track-info">
       <span class="track-info-title">{{track.title}}</span>
       <span class="track-info-username">{{track.user.username}}</span>
     </div>
     <div class="track-controls">
-      <v-button theme="dark" title="Stop playback of the current track">
+      <v-button @click.native="stopTrack" v-if="track.is_playing" theme="dark" title="Stop playback">
         <stop-icon></stop-icon>
       </v-button>
-      <v-button theme="dark" title="Remove this track from the playlist">
+      <v-button @click.native="playTrack" v-else theme="dark" title="Play track">
+        <play-icon></play-icon>
+      </v-button>
+      <v-button @click.native="removeFromPlaylist" theme="dark" title="Remove this track from the playlist">
         <playlist-remove-icon></playlist-remove-icon>
       </v-button>
-      <v-button theme="dark" title="Open this track page on SoundCloud">
-        <soundcloud-icon></soundcloud-icon>
+      <v-button @click.native="stopTrack" theme="dark" title="Open this track on SoundCloud">
+        <a :href="track.permalink_url" target="_blank">
+          <soundcloud-icon></soundcloud-icon>
+        </a>
       </v-button>
     </div>
   </li>
@@ -27,22 +26,34 @@
 
 <script>
 import Button from './Button'
+import PlayIcon from 'vue-material-design-icons/play-circle-outline'
 import PlaylistRemoveIcon from 'vue-material-design-icons/playlist-remove'
 import SoundcloudIcon from 'vue-material-design-icons/soundcloud'
-import StopIcon from 'vue-material-design-icons/stop'
+import StopIcon from 'vue-material-design-icons/stop-circle-outline'
 
 export default {
   name: 'PlaylistTrack',
   components: {
     'v-button': Button,
+    PlayIcon,
     PlaylistRemoveIcon,
     SoundcloudIcon,
     StopIcon
   },
-  props: ['track']
+  props: ['track'],
+
+  methods: {
+    playTrack() {
+      this.$store.commit('setCurrentTrack', this.track);
+    },
+
+    removeFromPlaylist() {
+      this.$store.commit('removeFromPlaylist', this.track);
+    },
+
+    stopTrack() {
+      this.$store.state.current_track.is_playing = false;
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>

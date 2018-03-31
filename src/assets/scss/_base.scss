@@ -12,7 +12,7 @@ body {
   font-family: $baseFont;
   line-height: 1.4;
   
-  .view-playlist & {
+  .viewing-playlist & {
     overflow: hidden;
   }
 }
@@ -44,10 +44,6 @@ p {
   pointer-events: none;
 }
 
-.placeholder-img {
-  padding: 20%;
-}
-
 .callout-text {
   display: flex;
   flex-direction: column;
@@ -58,4 +54,8 @@ p {
 .view-container {
   position: relative;
   overflow-x: hidden;
+}
+
+.is-hidden {
+  display: none;
 }

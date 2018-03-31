@@ -13,25 +13,14 @@
   background-color: $containerBgColor;
   border-radius: $baseBorderRadius;
   z-index: 500;
-  opacity: 0;
-  transform: translateY(calc(100% + (#{$playerImageSize} / 2) + #{$basePadding}));
-  transition: 
-    opacity 0s $baseTransSpeed,
-    transform $baseTransSpeed $transTimeFuncBounce;
   
   @media (min-width: $bpMd) {
     flex-direction: row;
     align-items: center;
   }
-  
-  &.is-showing {
-    opacity: 1;
-    transform: translateY(0);
-    transition: transform $baseTransSpeed 0.1s $transTimeFuncEase;
-  }
 }
 
-.track-info {
+.track-content {
   position: relative;
   display: flex;
   align-items: center;
@@ -79,7 +68,7 @@
   }
 }
 
-.track-info-text {
+.track-info {
   flex: 1;
   min-width: 0;
   margin-left: $basePadding;
