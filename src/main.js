@@ -15,6 +15,7 @@ Vue.use(vClickOutside)
 
 Vue.prototype.$app_name = 'Soundcloud Grid'
 Vue.prototype.$track_placeholder_image = placeholder
+Vue.prototype.$player
 
 /* eslint-disable no-new */
 new Vue({

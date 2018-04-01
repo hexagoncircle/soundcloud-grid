@@ -11,7 +11,7 @@
       <div class="track-controls">
         <v-button @click.native="stopTrack" theme="dark" title="Stop playback">
           <stop-icon></stop-icon>        
-          </v-button>
+        </v-button>
         <v-button v-if="!currentTrack.in_playlist" @click.native="addToPlaylist" theme="dark" title="Add this track to the playlist">
           <playlist-add-icon></playlist-add-icon>
         </v-button>
@@ -29,7 +29,6 @@
 <script>
 import Button from './Button'
 import Link from './ButtonLink'
-import PlayIcon from 'vue-material-design-icons/play-circle-outline'
 import PlaylistAddIcon from 'vue-material-design-icons/playlist-plus'
 import PlaylistCheckIcon from 'vue-material-design-icons/playlist-check'
 import SoundcloudIcon from 'vue-material-design-icons/soundcloud'
@@ -40,7 +39,6 @@ export default {
   components: {
     'v-button': Button,
     'v-link': Link,
-    PlayIcon,
     PlaylistAddIcon,
     PlaylistCheckIcon,
     SoundcloudIcon,

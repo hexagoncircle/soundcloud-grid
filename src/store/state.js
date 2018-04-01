@@ -8,7 +8,6 @@ export default {
     title: 'Current Playlist',
     tracks: []
   },
-  player: null,
   search: {
     filter_type: 'genre',
     placeholder: 'Enter a genre',

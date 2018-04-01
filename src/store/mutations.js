@@ -9,7 +9,6 @@ export default {
       state.current_track.in_playlist = true;
     }
 
-    return state.current_track;
   },
 
   optimizeTrackImage: (state, track) => {
@@ -18,8 +17,6 @@ export default {
     } else {
       track.artwork_url = track.artwork_url.replace('large', 't500x500');
     }
-
-    return track.artwork_url;
   },
 
   removeFromPlaylist: (state, selectedTrack) => {
@@ -29,24 +26,18 @@ export default {
         state.current_track.in_playlist = false;
       }
     });
-
-    return state.current_track;
   },
 
   setCurrentTrack: (state, selectedTrack) => {
-    state.tracklist.forEach(track => {
-      if(track === selectedTrack && !track.is_playing) {
-        track.is_playing = true;
-        state.current_track = selectedTrack;
-      } else {
-        track.is_playing = false;
-      }
+    state.tracklist.concat(state.playlist.tracks).forEach(track => {
+      if (track.id !== selectedTrack.id) track.is_playing = false
     });
-
-    return state.current_track;
+    
+    selectedTrack.is_playing = !selectedTrack.is_playing;
+    state.current_track = selectedTrack;
   },
 
   stopTrack: state => {
-    return state.current_track.is_playing = false;
+    state.current_track.is_playing = false;
   }
 }
