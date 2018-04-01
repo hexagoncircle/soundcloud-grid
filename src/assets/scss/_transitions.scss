@@ -3,13 +3,10 @@
 // ================================================
 .track-enter-active,
 .track-leave-active {
-  transition: 
-    transform 0.4s 0.2s $transTimeFuncEase,
-    opacity 0.4s 0.2s $transTimeFuncEase;
+  transition: opacity 0.8s 0.2s $transTimeFuncEase;
 }
 .track-enter,
 .track-leave-to {
-  transform: scale(0.4);
   opacity: 0;
 }
 
@@ -42,15 +39,15 @@
   transform: translateY(calc(100% + (#{$playerImageSize} / 2) + #{$basePadding}));
 }
 
-.slide-down-fade-enter-active,
-.slide-down-fade-leave-active {
+.slide-vertical-fade-enter-active,
+.slide-vertical-fade-leave-active {
   transition: 
     transform 0.4s $transTimeFuncEase,
     opacity 0.4s $transTimeFuncEase;
 }
 
-.slide-down-fade-enter,
-.slide-down-fade-leave-to {
+.slide-vertical-fade-enter,
+.slide-vertical-fade-leave-to {
   transform: translateY(-6px);
   opacity: 0;
 }

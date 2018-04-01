@@ -1,8 +1,9 @@
 export default {
-  current_track: {},  
+  current_track: {},
+  loading: true,
   sc_options: {
-    limit: 100,
-    kind: 'trending'
+    kind: 'trending',
+    limit: 100    
   },
   playlist: {
     title: 'Current Playlist',
@@ -11,7 +12,8 @@ export default {
   search: {
     filter_type: 'genre',
     placeholder: 'Enter a genre',
-    value: ''
+    static_value: '',    
+    value: '',
   },
   tracklist: [],
   view_playlist: false    

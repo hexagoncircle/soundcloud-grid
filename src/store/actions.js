@@ -1,6 +1,7 @@
 export default {
   fetchTracks({commit}, payload = '') {
     this.state.search.filter_type === 'genre' ? this.state.sc_options.genres = payload : this.state.sc_options.q = payload;
+    this.state.loading = true;
 
     SC.get('/tracks', this.state.sc_options).then(tracks => {
       let results = [];
@@ -10,7 +11,9 @@ export default {
         this.commit('optimizeTrackImage', track);
         results.push(track);
       });
-      
+
+      this.state.loading = false;
+      this.state.search.static_value = this.state.search.value;
       this.state.tracklist = results;
     }).catch(error => {
       console.log(error);

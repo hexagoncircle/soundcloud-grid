@@ -132,16 +132,3 @@
     }
   }
 }
-
-.empty-state-container {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: $basePadding;
-  height: 50vh;
-  max-width: 500px;
-  text-align: center;
-}
