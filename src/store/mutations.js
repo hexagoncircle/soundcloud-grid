@@ -1,5 +1,5 @@
 export default {
-  addToPlaylist: (state, selectedTrack) => {
+  ADD_TO_PLAYLIST: (state, selectedTrack) => {
     let inPlaylist = state.playlist.tracks.some((track, index) => {
       return track.id === selectedTrack.id;
     });
@@ -11,7 +11,7 @@ export default {
 
   },
 
-  optimizeTrackImage: (state, track) => {
+  OPTIMIZE_TRACK_IMAGE: (state, track) => {
     if (track.artwork_url === null) {
       track.artwork_url = track.user.avatar_url.replace('large', 't500x500');
     } else {
@@ -19,7 +19,7 @@ export default {
     }
   },
 
-  removeFromPlaylist: (state, selectedTrack) => {
+  REMOVE_FROM_PLAYLIST: (state, selectedTrack) => {
     state.playlist.tracks.forEach((track, index) => {
       if (track.id === selectedTrack.id) {
         state.playlist.tracks.splice(index, 1);
@@ -28,16 +28,17 @@ export default {
     });
   },
 
-  setCurrentTrack: (state, selectedTrack) => {
+  SET_CURRENT_TRACK: (state, selectedTrack) => {
     state.tracklist.concat(state.playlist.tracks).forEach(track => {
       if (track.id !== selectedTrack.id) track.is_playing = false
     });
     
     selectedTrack.is_playing = !selectedTrack.is_playing;
     state.current_track = selectedTrack;
+    state.current_track.is_playing ? state.sc_player.play() : state.sc_player.pause();    
   },
 
-  stopTrack: state => {
-    state.current_track.is_playing = false;
+  STOP_TRACK: (state, track) => {
+    track.is_playing = false;
   }
 }

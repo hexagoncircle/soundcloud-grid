@@ -1,13 +1,16 @@
 <template>
   <transition name="player">
-    <div v-show="currentTrack.is_playing" class="player-container" id="player">
+    <div v-show="isPlaying" class="player-container" id="player">
+      <audio ref="audio" :src="streamSrc" autoPlay></audio>
+      
       <div class="track-content">
-        <img class="track-info-img" :src="currentTrack.artwork_url" :alt="currentTrack.title" />
+        <img class="track-image" :src="currentTrack.artwork_url" :alt="currentTrack.title" />
         <div class="track-info">
           <span class="track-info-title">{{currentTrack.title}}</span>
           <span v-if="currentTrack.user" class="track-info-username">{{currentTrack.user.username}}</span>
         </div>
       </div>
+
       <div class="track-controls">
         <v-button @click.native="stopTrack" theme="dark" title="Stop playback">
           <stop-icon></stop-icon>        
@@ -47,22 +50,44 @@ export default {
 
   methods: {
     addToPlaylist() {
-      this.$store.commit('addToPlaylist', this.currentTrack);
+      this.$store.commit('ADD_TO_PLAYLIST', this.currentTrack);
     },
 
     removeFromPlaylist() {
-      this.$store.commit('removeFromPlaylist', this.currentTrack);
+      this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
     },
 
     stopTrack() {
-      this.$store.commit('stopTrack', this.currentTrack);
+      this.$store.commit('STOP_TRACK', this.currentTrack);
     },
   },
   
   computed: {
     currentTrack() {
-      return this.$store.state.current_track;
+      return this.$store.getters.getCurrentTrack;
+    },
+
+    isPlaying() {
+      return this.$store.getters.checkPlayback;
+    },
+
+    inPlaylist() {
+      return this.$store.getters.checkPlaylist;
+    },
+
+    streamSrc() {
+      return this.$store.getters.getStreamSource;
     }
+  },
+
+  watch: {
+    inPlaylist() {
+      console.log('watch');
+    }
+  },
+
+  mounted() {
+    this.$store.state.sc_player = document.querySelector('audio');
   }
 }
 </script>

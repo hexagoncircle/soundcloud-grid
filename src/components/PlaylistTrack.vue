@@ -44,11 +44,11 @@ export default {
 
   methods: {
     playTrack() {
-      this.$store.commit('setCurrentTrack', this.track);
+      this.$store.commit('SET_CURRENT_TRACK', this.track);
     },
 
     removeFromPlaylist() {
-      this.$store.commit('removeFromPlaylist', this.track);
+      this.$store.commit('REMOVE_FROM_PLAYLIST', this.track);
     },
 
     stopTrack() {

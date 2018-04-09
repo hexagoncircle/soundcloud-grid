@@ -1,35 +1,29 @@
 export default {
-  fetchTracks({commit}, payload = '') {
-    this.state.search.filter_type === 'genre' ? this.state.sc_options.genres = payload : this.state.sc_options.q = payload;
+  fetchTracks({commit}, type = '') {
     this.state.loading = true;
+    
+    if (this.state.search.filter_type === 'genre') {
+      this.state.sc_options.genres = type
+      this.state.sc_options.q = '';
+    } else {
+      this.state.sc_options.genres = '';
+      this.state.sc_options.q = type;
+    }
 
     SC.get('/tracks', this.state.sc_options).then(tracks => {
       let results = [];
 
       tracks.forEach(track => {
         track.is_playing = false;          
-        this.commit('optimizeTrackImage', track);
+        this.commit('OPTIMIZE_TRACK_IMAGE', track);
         results.push(track);
       });
 
-      this.state.loading = false;
       this.state.search.static_value = this.state.search.value;
       this.state.tracklist = results;
+      this.state.loading = false;
     }).catch(error => {
       console.log(error);
-    });
-  },
-
-  streamTrack({commit}, id) {
-    SC.stream('/tracks/' + id).then(player => {
-      this.state.player = player;
-      if (this.state.current_track.is_playing) {
-        this.state.player.play();
-      } else {
-        this.state.player.pause();
-      }
-    }).catch(function(error) {
-        console.log(error);
     });
   }
 }

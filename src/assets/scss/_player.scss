@@ -49,24 +49,6 @@
     transform: translateX(0);
   }
 }
-  
-.track-info-img {
-  @include track-foundation($playerImageSizeSm);
-  
-  .player-container & {
-    @media (min-width: $bpSm) {
-      position: absolute;
-      bottom: 0;
-      margin-top: -$playerImageSize / 2;
-      max-width: $playerImageSize;
-      box-shadow: rgba(black, 0.2) 0 4px 12px; 
-    }
-  }
-  
-  .playlist-item & {
-    width: 36px;
-  }
-}
 
 .track-info {
   flex: 1;

@@ -1,0 +1,46 @@
+.track-image {
+  position: relative;
+  width: 100%;
+  background-color: $darkgray;
+  background-image:
+    linear-gradient(45deg,
+      $darkgray,
+      $darkgray 50%,
+      $darkgraytint 50%,
+      $darkgraytint
+    );
+  border-radius: $baseBorderRadius;
+
+  .grid-track & {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: $gridImageSize;       
+    object-fit: cover;
+    border-radius: $baseBorderRadius;
+    transform: translateZ(0);
+  }
+
+  .has-error & {
+    opacity: 0.1 !important;
+    transition: opacity ($baseTransSpeed / 2) ease-out;
+  }
+  
+  .player-container & {
+    max-width: $playerImageSizeSm;
+
+    @media (min-width: $bpSm) {
+      position: absolute;
+      bottom: 0;
+      margin-top: -$playerImageSize / 2;
+      max-width: $playerImageSize;      
+      box-shadow: rgba(black, 0.2) 0 4px 12px; 
+    }
+  }
+  
+  .playlist-track & {
+    max-width: $playerImageSizeSm;
+    width: 100%;
+    height: 100%;
+  }
+}

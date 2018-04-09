@@ -1,13 +1,6 @@
 <template>
   <transition name="track">
-    <div
-      v-show="show_element"
-      :class="`track ${setGridSpan} ${track.is_playing ? 'is-playing' : ''}`"
-      :data-track-id="track.id"
-      :data-title="track.title"
-      :data-username="track.user.username"
-      :data-track-url="track.permalink_url"
-    >
+    <div v-show="show_element" :class="`grid-track ${setGridSpan} ${track.is_playing ? 'is-playing' : ''}`">
       <v-button @click.native="selectTrack" theme="overlay" :title="track.is_playing ? 'Stop playback' : 'Play track'">
         <stop-icon></stop-icon>        
       </v-button>
@@ -52,8 +45,7 @@ export default {
     },
 
     selectTrack() {
-      this.$store.commit('setCurrentTrack', this.track);
-      //this.$store.dispatch('streamTrack', this.$store.state.current_track.id);
+      this.$store.commit('SET_CURRENT_TRACK', this.track);
     },
 
     setPlaceholder() {

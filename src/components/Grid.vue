@@ -1,6 +1,7 @@
 <template>
   <section id="grid" class="track-grid">
     <div v-if="loading" class="empty-state-container">
+      <loader></loader>
       <h3>Fetching tracks...</h3>
     </div>
     <grid-track v-if="!loading" v-for="track in tracks" :key="`grid-${track.id}`" :track="track" />
@@ -13,11 +14,13 @@
 
 <script>
 import GridTrack from './GridTrack'
+import Loader from './Loader'
 
 export default {
   name: 'Grid',
   components: {
-    GridTrack
+    GridTrack,
+    Loader
   },
 
   computed: {

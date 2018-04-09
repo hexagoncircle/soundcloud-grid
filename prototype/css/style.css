@@ -446,7 +446,7 @@ p {
   border-radius: 2px;
 }
 @media (min-width: 500px) {
-  .player-container .track-info-img {
+  .player-container .track-image {
     position: absolute;
     bottom: 0;
     margin-top: -50px;
@@ -455,7 +455,7 @@ p {
             box-shadow: rgba(0, 0, 0, 0.2) 0 4px 12px;
   }
 }
-.playlist-item .track-info-img {
+.playlist-item .track-image {
   width: 36px;
 }
 

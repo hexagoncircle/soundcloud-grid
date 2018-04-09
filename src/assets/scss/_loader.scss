@@ -1,0 +1,38 @@
+$loader-size: 40px;
+
+.loader {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-template-rows: 2fr 2fr;
+  grid-gap: 4px;
+  position: relative;
+  width: $loader-size;
+}
+
+.loader-tile {
+  width: $loader-size / 2;
+  height: $loader-size / 2;
+  background-color: white;
+  border-radius: $baseBorderRadius / 2;
+  animation: loader-tile-slide 1s ease-out infinite alternate;
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: $i * .5s / 6;
+    }
+  }
+}
+
+@keyframes loader-tile-slide {
+  0%, 10% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  40%, 80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0.8;
+  }
+}

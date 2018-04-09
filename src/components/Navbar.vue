@@ -48,13 +48,14 @@
         ref="search"
         class="track-filter-input"
         type="text"
+        :disabled="loading"
         :placeholder="searchPlaceholder"
         :data-filter-type="searchFilterType"
       />
       <v-button
         @click.native="searchTracks"
         theme="primary"
-        :disabled="!searchValue"
+        :disabled="!searchValue || loading"
         :title="searchValue ? 'Click to search for ' + searchValue : 'Enter a search value'"
       >
         <magnify-icon></magnify-icon>
@@ -93,6 +94,10 @@ export default {
   },
 
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
+
     searchFilterType() {
       return this.$store.state.search.filter_type;
     },
@@ -130,12 +135,12 @@ export default {
 
     selectFilter(event, type) {
       event.preventDefault();
-      this.$store.state.search.filterType = type;
+      this.$store.state.search.filter_type = type;
       this.$store.state.search.value = '';
       this.$store.state.search.placeholder = `Enter a ${type}`;
       this.$refs.search.focus();
       this.selected_filter = type;
-      this.closeFiltersMenu();      
+      this.closeFiltersMenu();
     },
 
     searchTracks() {

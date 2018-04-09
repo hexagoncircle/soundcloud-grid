@@ -1,5 +1,6 @@
 export default {
   current_track: {},
+  sc_player: null,
   loading: true,
   sc_options: {
     kind: 'trending',
