@@ -12,16 +12,16 @@
       </div>
 
       <div class="track-controls">
-        <v-button @click.native="stopTrack" theme="dark" title="Stop playback">
+        <v-button @click.native="togglePlayback" theme="dark" title="Stop playback">
           <stop-icon></stop-icon>        
         </v-button>
-        <v-button v-if="!currentTrack.in_playlist" @click.native="addToPlaylist" theme="dark" title="Add this track to the playlist">
-          <playlist-add-icon></playlist-add-icon>
-        </v-button>
-        <v-button v-else @click.native="removeFromPlaylist" theme="dark" title="Remove this track from the playlist">
+        <v-button v-if="inPlaylist" @click.native="removeFromPlaylist" theme="dark" title="Remove this track from the playlist">
           <playlist-check-icon></playlist-check-icon>
         </v-button>
-        <v-link @click.native="stopTrack" :href="currentTrack.permalink_url" target="_blank" theme="dark" title="Open this track on SoundCloud">
+        <v-button v-else @click.native="addToPlaylist" theme="dark" title="Add this track to the playlist">
+          <playlist-add-icon></playlist-add-icon>
+        </v-button>
+        <v-link @click.native="togglePlayback" :href="currentTrack.permalink_url" target="_blank" theme="dark" title="Open this track on SoundCloud">
           <soundcloud-icon></soundcloud-icon>
         </v-link>
       </div>
@@ -57,8 +57,8 @@ export default {
       this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
     },
 
-    stopTrack() {
-      this.$store.commit('STOP_TRACK', this.currentTrack);
+    togglePlayback() {
+      this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
     },
   },
   
@@ -77,12 +77,6 @@ export default {
 
     streamSrc() {
       return this.$store.getters.getStreamSource;
-    }
-  },
-
-  watch: {
-    inPlaylist() {
-      console.log('watch');
     }
   },
 

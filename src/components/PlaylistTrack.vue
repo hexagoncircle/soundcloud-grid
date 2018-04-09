@@ -6,16 +6,16 @@
       <span class="track-info-username">{{track.user.username}}</span>
     </div>
     <div class="track-controls">
-      <v-button @click.native="stopTrack" v-if="track.is_playing" theme="dark" title="Stop playback">
+      <v-button @click.native="togglePlayback" v-if="track.is_playing" theme="dark" title="Stop playback">
         <stop-icon></stop-icon>
       </v-button>
-      <v-button @click.native="playTrack" v-else theme="dark" title="Play track">
+      <v-button @click.native="togglePlayback" v-else theme="dark" title="Play track">
         <play-icon></play-icon>
       </v-button>
       <v-button @click.native="removeFromPlaylist" theme="dark" title="Remove this track from the playlist">
         <playlist-remove-icon></playlist-remove-icon>
       </v-button>
-      <v-link @click.native="stopTrack" :href="track.permalink_url" target="_blank" theme="dark" title="Open this track on SoundCloud">
+      <v-link @click.native="togglePlayback" :href="track.permalink_url" target="_blank" theme="dark" title="Open this track on SoundCloud">
         <soundcloud-icon></soundcloud-icon>
       </v-link>
     </div>
@@ -43,16 +43,12 @@ export default {
   props: ['track'],
 
   methods: {
-    playTrack() {
-      this.$store.commit('SET_CURRENT_TRACK', this.track);
-    },
-
     removeFromPlaylist() {
       this.$store.commit('REMOVE_FROM_PLAYLIST', this.track);
     },
-
-    stopTrack() {
-      this.$store.state.current_track.is_playing = false;
+    
+    togglePlayback() {
+      this.$store.commit('SET_CURRENT_TRACK', this.track);
     }
   }
 }

@@ -1,15 +1,15 @@
 <template>
   <transition name="track">
     <div v-show="show_element" :class="`grid-track ${setGridSpan} ${track.is_playing ? 'is-playing' : ''}`">
-      <v-button @click.native="selectTrack" theme="overlay" :title="track.is_playing ? 'Stop playback' : 'Play track'">
+      <v-button @click.native="togglePlayback" theme="overlay" :title="track.is_playing ? 'Stop playback' : 'Play track'">
         <stop-icon></stop-icon>        
       </v-button>
       <img
         @error="setPlaceholder"
         @load="imageLoaded"
-        class="track-image"
         :src="track.artwork_url"
         :alt="`Album art for ${track.title}`"
+        class="track-image"        
       />
     </div>
   </transition>  
@@ -44,13 +44,13 @@ export default {
       this.show_element = true;
     },
 
-    selectTrack() {
-      this.$store.commit('SET_CURRENT_TRACK', this.track);
+    setPlaceholder() {
+      this.track.artwork_url = this.$store.state.placeholder;
     },
 
-    setPlaceholder() {
-      this.track.artwork_url = this.$track_placeholder_image;
-    }
+    togglePlayback() {
+      this.$store.commit('SET_CURRENT_TRACK', this.track);
+    },
   }
 }
 </script>

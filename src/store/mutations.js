@@ -36,9 +36,5 @@ export default {
     selectedTrack.is_playing = !selectedTrack.is_playing;
     state.current_track = selectedTrack;
     state.current_track.is_playing ? state.sc_player.play() : state.sc_player.pause();    
-  },
-
-  STOP_TRACK: (state, track) => {
-    track.is_playing = false;
   }
 }

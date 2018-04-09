@@ -8,18 +8,6 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-@mixin hide-element {
-  position: fixed;
-  top: 100%;
-  opacity: 0;
-}
-
-@mixin show-element {
-  position: relative;
-  top: auto;
-  opacity: 1;
-}
-
 @mixin btn-colors($color, $bg, $hColor: $color, $hBg: $bg) {
   color: $color;
   background-color: $bg;

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{'viewing-playlist' : viewPlaylist}">
+  <div id="app">
     <navbar></navbar>
     <main class="view-container">
       <div @click="closePlaylist" class="view-overlay"></div>
@@ -40,7 +40,16 @@ export default {
 
   computed: {
     viewPlaylist() {
-      return this.$store.state.view_playlist;
+      return this.$store.getters.viewPlaylist;
+    }
+  },
+
+  watch: {
+    viewPlaylist() {
+      const cls = 'viewing-playlist';
+      const html = document.documentElement;
+
+      this.viewPlaylist ? html.classList.add(cls) : html.classList.remove(cls);
     }
   },
 
