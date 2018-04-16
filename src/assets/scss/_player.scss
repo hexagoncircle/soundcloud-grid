@@ -27,6 +27,7 @@
   min-width: 0;
   
   .player-container & {
+    flex: 1 0 50%;   
     margin-bottom: $basePadding;
   
     @media (min-width: $bpMd) {
@@ -96,6 +97,10 @@
   @media (min-width: $bpMd) {
     margin-left: $basePadding;
   }
+
+  .player-container & {
+    flex: 1 0 50%;
+  }
   
   .playlist-item & {
     opacity: 0;
@@ -111,5 +116,33 @@
     transition: 
       opacity ($baseTransSpeed / 2) ($baseTransSpeed / 2) ease-out,
       transform ($baseTransSpeed / 2) ($baseTransSpeed / 2) ease-out;
+  }
+
+  .btn {
+    flex: 0 0 auto;
+  }
+}
+
+.track-progress {
+  appearance: none;
+  height: 2px;
+  width: 100%;
+  background-color: $darkgray;
+  overflow: hidden;
+
+  &::-moz-progress-bar {
+    background-color: $orange;
+  }
+
+  &::-webkit-progress-bar {
+    background-color: transparent;
+  }
+
+  &::-webkit-progress-value {
+    background-color: $orange;
+  }
+
+  @media (min-width: $bpMd) {
+    margin: 0 $basePadding;
   }
 }

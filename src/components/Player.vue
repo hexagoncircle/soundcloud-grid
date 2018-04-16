@@ -11,7 +11,9 @@
         </div>
       </div>
 
+
       <div class="track-controls">
+        <progress ref="progress" class="track-progress" value="1" max="2"></progress>
         <v-button @click.native="togglePlayback" theme="dark" title="Stop playback">
           <stop-icon></stop-icon>        
         </v-button>

@@ -32,7 +32,7 @@ export default {
     state.tracklist.concat(state.playlist.tracks).forEach(track => {
       if (track.id !== selectedTrack.id) track.is_playing = false
     });
-    
+    console.log(selectedTrack);
     selectedTrack.is_playing = !selectedTrack.is_playing;
     state.current_track = selectedTrack;
     state.current_track.is_playing ? state.sc_player.play() : state.sc_player.pause();    
