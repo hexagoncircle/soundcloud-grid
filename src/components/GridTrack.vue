@@ -50,7 +50,7 @@ export default {
 
     togglePlayback() {
       this.$store.commit('SET_CURRENT_TRACK', this.track);
-    },
+    }
   }
 }
 </script>

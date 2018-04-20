@@ -32,9 +32,20 @@ export default {
     state.tracklist.concat(state.playlist.tracks).forEach(track => {
       if (track.id !== selectedTrack.id) track.is_playing = false
     });
-    console.log(selectedTrack);
     selectedTrack.is_playing = !selectedTrack.is_playing;
     state.current_track = selectedTrack;
     state.current_track.is_playing ? state.sc_player.play() : state.sc_player.pause();    
+  },
+
+  SET_CURRENT_TIME: (state, time) => {
+    var minutes = Math.floor(time / 60);
+    var seconds = (Math.floor(time % 60) < 10 ? '0' : '') + Math.floor(time % 60);
+    state.current_track.current_time = minutes + ':' + seconds;
+  },
+
+  SET_DURATION: (state, time) => {
+    var minutes = Math.floor(time / 60);
+    var seconds = (Math.floor(time % 60) < 10 ? '0' : '') + Math.floor(time % 60);
+    state.current_track.duration = minutes + ":" + seconds;
   }
 }

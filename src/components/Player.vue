@@ -1,7 +1,7 @@
 <template>
   <transition name="player">
     <div v-show="isPlaying" class="player-container" id="player">
-      <audio ref="audio" :src="streamSrc" autoPlay></audio>
+      <audio @loadeddata="updateDuration" @timeupdate="updateCurrentTime" ref="audio" :src="streamSrc" autoPlay></audio>
       
       <div class="track-content">
         <img class="track-image" :src="currentTrack.artwork_url" :alt="currentTrack.title" />
@@ -11,9 +11,12 @@
         </div>
       </div>
 
-
       <div class="track-controls">
-        <progress ref="progress" class="track-progress" value="1" max="2"></progress>
+        <div class="track-progress">
+          <span class="track-current-time">{{currentTime}}</span>
+          <progress ref="progress" class="track-progress-bar" value="0" max="1"></progress>
+          <span class="track-duration">{{duration}}</span>
+        </div>
         <v-button @click.native="togglePlayback" theme="dark" title="Stop playback">
           <stop-icon></stop-icon>        
         </v-button>
@@ -55,18 +58,35 @@ export default {
       this.$store.commit('ADD_TO_PLAYLIST', this.currentTrack);
     },
 
+    updateCurrentTime() {
+      this.$store.commit('SET_CURRENT_TIME', this.$refs.audio.currentTime);      
+      this.$refs.progress.value = this.$refs.audio.currentTime / this.$refs.audio.duration;
+    },
+
+    updateDuration() {
+      this.$store.commit('SET_DURATION', this.$refs.audio.duration); 
+    },
+
     removeFromPlaylist() {
       this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
     },
 
     togglePlayback() {
       this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
-    },
+    }
   },
   
   computed: {
     currentTrack() {
       return this.$store.getters.getCurrentTrack;
+    },
+
+    currentTime() {
+      return this.$store.getters.getCurrentTime;
+    },
+
+    duration() {
+      return this.$store.getters.getDuration;
     },
 
     isPlaying() {

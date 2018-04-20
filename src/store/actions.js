@@ -15,7 +15,9 @@ export default {
 
       tracks.forEach(track => {
         track.is_playing = false;
-        track.in_playlist = false;       
+        track.in_playlist = false;
+        track.current_time = null;
+        track.duration = null;       
         this.commit('OPTIMIZE_TRACK_IMAGE', track);
         results.push(track);
       });
