@@ -17,7 +17,6 @@ export default {
         track.is_playing = false;
         track.in_playlist = false;
         track.current_time = null;
-        track.duration = null;       
         this.commit('OPTIMIZE_TRACK_IMAGE', track);
         results.push(track);
       });
@@ -26,7 +25,7 @@ export default {
       this.state.tracklist = results;
       this.state.loading = false;
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
     });
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <transition name="player">
     <div v-show="isPlaying" class="player-container" id="player">
-      <audio @loadeddata="updateDuration" @timeupdate="updateCurrentTime" ref="audio" :src="streamSrc" autoPlay></audio>
+      <audio @timeupdate="updateCurrentTime" ref="audio" :src="streamSrc" autoplay></audio>
       
       <div class="track-content">
         <img class="track-image" :src="currentTrack.artwork_url" :alt="currentTrack.title" />
@@ -13,9 +13,9 @@
 
       <div class="track-controls">
         <div class="track-progress">
-          <span class="track-current-time">{{currentTime}}</span>
+          <span class="track-current-time">{{currentTime | formatTime}}</span>
           <progress ref="progress" class="track-progress-bar" value="0" max="1"></progress>
-          <span class="track-duration">{{duration}}</span>
+          <span class="track-duration">{{duration | formatTime}}</span>
         </div>
         <v-button @click.native="togglePlayback" theme="dark" title="Stop playback">
           <stop-icon></stop-icon>        
@@ -52,29 +52,6 @@ export default {
     SoundcloudIcon,
     StopIcon
   },
-
-  methods: {
-    addToPlaylist() {
-      this.$store.commit('ADD_TO_PLAYLIST', this.currentTrack);
-    },
-
-    updateCurrentTime() {
-      this.$store.commit('SET_CURRENT_TIME', this.$refs.audio.currentTime);      
-      this.$refs.progress.value = this.$refs.audio.currentTime / this.$refs.audio.duration;
-    },
-
-    updateDuration() {
-      this.$store.commit('SET_DURATION', this.$refs.audio.duration); 
-    },
-
-    removeFromPlaylist() {
-      this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
-    },
-
-    togglePlayback() {
-      this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
-    }
-  },
   
   computed: {
     currentTrack() {
@@ -97,13 +74,54 @@ export default {
       return this.$store.getters.checkPlaylist;
     },
 
+    player() {
+      return this.$store.getters.getPlayer;
+    },
+
     streamSrc() {
       return this.$store.getters.getStreamSource;
     }
   },
 
+  filters: {
+    formatTime(ms) {
+      var mins = Math.floor(ms / 60000);
+      var secs = (Math.floor(ms % 60000 / 1000) < 10 ? '0' : '') + Math.floor(ms % 60000 / 1000);
+      return mins + ':' + secs;
+    }
+  },
+
+  methods: {
+    addToPlaylist() {
+      this.$store.commit('ADD_TO_PLAYLIST', this.currentTrack);
+    },
+
+    updateCurrentTime() {
+      this.$store.state.current_track.current_time = this.$refs.audio.currentTime * 1000;
+      if (this.$refs.audio.duration) {
+        this.$refs.progress.value = this.$refs.audio.currentTime / this.refs.audio.duration;
+      } else {
+        this.$refs.progress.value = 0;
+      }
+    },
+
+    removeFromPlaylist() {
+      this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
+    },
+
+    togglePlayback() {
+      console.log(this.currentTime);
+      console.log(this.duration);
+      if (this.player.src !== undefined) {
+        this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
+        this.player.paused ? this.player.play() : this.player.pause();
+      } 
+    }
+  },
+
   mounted() {
     this.$store.state.sc_player = document.querySelector('audio');
+    this.$store.state.sc_player.src = '';
   }
 }
 </script>

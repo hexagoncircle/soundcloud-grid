@@ -34,6 +34,10 @@ export default {
   },
 
   computed: {
+    player() {
+      return this.$store.getters.getPlayer;
+    },
+
     setGridSpan() {
       return 'span-' + Math.floor(Math.random() * 2 + 1);
     }
@@ -49,7 +53,10 @@ export default {
     },
 
     togglePlayback() {
-      this.$store.commit('SET_CURRENT_TRACK', this.track);
+      if (this.player.src !== undefined) {
+        this.$store.commit('SET_CURRENT_TRACK', this.track);
+        this.player.paused ? this.player.play() : this.player.pause(); 
+      }
     }
   }
 }

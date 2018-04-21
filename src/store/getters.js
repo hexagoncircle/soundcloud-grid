@@ -6,7 +6,8 @@ export default {
   getCurrentTrack: (state) => state.current_track,
   getCurrentTime: (state) => state.current_track.current_time,
   getDuration: (state) => state.current_track.duration,
-  getStreamSource: (state) => state.current_track.stream_url + '?client_id=' + config.SC_CLIENT_ID,
+  getPlayer: (state) => state.sc_player,
+  getStreamSource: (state) => state.current_track.permalink_url !== undefined ? state.current_track.stream_url + '?client_id=' + config.SC_CLIENT_ID : '',
   trackDuration: (state) => state.current_track.duration,
   viewPlaylist: (state) => state.view_playlist
 }
