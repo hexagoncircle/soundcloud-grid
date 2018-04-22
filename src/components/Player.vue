@@ -74,10 +74,6 @@ export default {
       return this.$store.getters.checkPlaylist;
     },
 
-    player() {
-      return this.$store.getters.getPlayer;
-    },
-
     streamSrc() {
       return this.$store.getters.getStreamSource;
     }
@@ -96,6 +92,14 @@ export default {
       this.$store.commit('ADD_TO_PLAYLIST', this.currentTrack);
     },
 
+    removeFromPlaylist() {
+      this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
+    },
+
+    togglePlayback() {
+      this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
+    },
+    
     updateCurrentTime() {
       this.$store.state.current_track.current_time = this.$refs.audio.currentTime * 1000;
       if (this.$refs.audio.duration) {
@@ -105,23 +109,19 @@ export default {
       }
     },
 
-    removeFromPlaylist() {
-      this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
-    },
-
-    togglePlayback() {
-      this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
+    updatePlayback() {
+      const audio = document.querySelector('audio');      
+      this.isPlaying ? audio.play() : audio.pause();
+      console.log(this.streamSrc);
+      console.log(audio.src);
+      console.log(this.currentTrack);
     }
   },
 
   watch: {
     isPlaying() {
-      this.isPlaying ? this.player.play() : this.player.pause();      
+      this.updatePlayback();
     }
-  },
-
-  mounted() {
-    this.$store.state.sc_player = document.querySelector('audio');
   }
 }
 </script>

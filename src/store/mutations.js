@@ -27,7 +27,7 @@ export default {
     state.tracklist.concat(state.playlist.tracks).forEach(track => {
       if (track.id !== selectedTrack.id) track.is_playing = false
     });
+    state.current_track = selectedTrack;    
     selectedTrack.is_playing = !selectedTrack.is_playing;
-    state.current_track = selectedTrack;
   }
 }

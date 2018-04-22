@@ -2,16 +2,15 @@ import placeholder from '../assets/images/track-placeholder.png'
 
 export default {
   current_track: {},
-  sc_player: null,
   loading: true,
-  sc_options: {
-    kind: 'trending',
-    limit: 100
-  },
   placeholder: placeholder,
   playlist: {
     title: 'Current Playlist',
     tracks: []
+  },
+  sc_options: {
+    kind: 'trending',
+    limit: 100
   },
   search: {
     filter_type: 'genre',

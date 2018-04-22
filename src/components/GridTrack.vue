@@ -34,10 +34,6 @@ export default {
   },
 
   computed: {
-    player() {
-      return this.$store.getters.getPlayer;
-    },
-
     setGridSpan() {
       return 'span-' + Math.floor(Math.random() * 2 + 1);
     }
