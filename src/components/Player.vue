@@ -114,7 +114,6 @@ export default {
       this.isPlaying ? audio.play() : audio.pause();
       console.log(this.streamSrc);
       console.log(audio.src);
-      console.log(this.currentTrack);
     }
   },
 
