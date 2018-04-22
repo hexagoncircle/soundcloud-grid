@@ -1,4 +1,4 @@
-import { config } from '../../app-config'
+import { config } from '../../config/app-config'
 
 export default {
   checkPlayback: (state) => state.current_track.is_playing,
