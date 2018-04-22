@@ -11,7 +11,11 @@ export default {
   },
 
   OPTIMIZE_TRACK_IMAGE: (state, track) => {
-    if (track.artwork_url !== null) track.artwork_url = track.artwork_url.replace('large', 't500x500');
+    if (track.artwork_url !== null) {
+      track.artwork_url = track.artwork_url.replace('large', 't500x500');
+    } else {
+      track.artwork_url = track.user.avatar_url.replace('large', 't500x500');
+    }
   },
 
   REMOVE_FROM_PLAYLIST: (state, selection) => {

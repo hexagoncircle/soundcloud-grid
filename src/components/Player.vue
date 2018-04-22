@@ -66,6 +66,10 @@ export default {
       return this.$store.getters.getDuration;
     },
 
+    hasError() {
+      return this.$store.getters.hasError;
+    },
+
     isPlaying() {
       return this.$store.getters.checkPlayback;
     },
@@ -110,10 +114,15 @@ export default {
     },
 
     updatePlayback() {
-      const audio = document.querySelector('audio');      
-      this.isPlaying ? audio.play() : audio.pause();
-      console.log(this.streamSrc);
-      console.log(audio.src);
+      this.$refs.audio.onerror = () => {
+        this.$store.state.current_track.has_error = true;
+        this.$store.state.current_track.is_playing = false;
+      };
+      this.isPlaying ? this.$refs.audio.play() : this.$refs.audio.pause();
+    },
+
+    updateStreamSource() {
+      return this.$store.state.current_track.stream_url !== undefined ? this.$store.state.current_track.stream_url + '?client_id=' + config.SC_CLIENT_ID : '';
     }
   },
 

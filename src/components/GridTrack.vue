@@ -1,7 +1,12 @@
 <template>
   <transition name="track">
-    <div v-show="show_element" :class="`grid-track ${setGridSpan} ${track.is_playing ? 'is-playing' : ''}`">
-      <v-button @click.native="togglePlayback" theme="overlay" :title="track.is_playing ? 'Stop playback' : 'Play track'">
+    <div v-show="show_element" :class="`grid-track ${setGridSpan}${track.is_playing ? ' is-playing' : ''}${track.has_error ? ' has-error' : ''}`">
+      <v-button 
+        @click.native="togglePlayback"
+        theme="overlay"
+        :title="track.is_playing ? 'Stop playback' : 'Play track'"
+        :disabled="track.has_error === true"
+      >
         <stop-icon></stop-icon>        
       </v-button>
       <img
