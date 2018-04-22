@@ -93,9 +93,10 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
+  margin: (-$basePadding) (-$basePadding) (-$basePadding / 2);
   
   @media (min-width: $bpMd) {
-    margin-left: $basePadding;
+    margin: 0 0 0 $basePadding;
   }
 
   .player-container & {
@@ -153,5 +154,11 @@
 
   &::-webkit-progress-value {
     background-color: $orange;
+  }
+}
+
+.track-buttons {
+  @media (min-width: $bpMd) {
+    margin-right: $basePadding;
   }
 }
