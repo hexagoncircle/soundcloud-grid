@@ -53,10 +53,7 @@ export default {
     },
 
     togglePlayback() {
-      if (this.player.src !== undefined) {
-        this.$store.commit('SET_CURRENT_TRACK', this.track);
-        this.player.paused ? this.player.play() : this.player.pause(); 
-      }
+      this.$store.commit('SET_CURRENT_TRACK', this.track); 
     }
   }
 }

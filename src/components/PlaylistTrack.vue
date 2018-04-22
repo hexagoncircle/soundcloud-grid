@@ -42,6 +42,12 @@ export default {
   },
   props: ['track'],
 
+  computed: {
+    player() {
+      return this.$store.getters.getPlayer;
+    }
+  },
+
   methods: {
     removeFromPlaylist() {
       this.$store.commit('REMOVE_FROM_PLAYLIST', this.track);

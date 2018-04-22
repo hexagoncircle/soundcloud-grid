@@ -99,7 +99,7 @@ export default {
     updateCurrentTime() {
       this.$store.state.current_track.current_time = this.$refs.audio.currentTime * 1000;
       if (this.$refs.audio.duration) {
-        this.$refs.progress.value = this.$refs.audio.currentTime / this.refs.audio.duration;
+        this.$refs.progress.value = this.$refs.audio.currentTime / this.$refs.audio.duration;
       } else {
         this.$refs.progress.value = 0;
       }
@@ -110,18 +110,18 @@ export default {
     },
 
     togglePlayback() {
-      console.log(this.currentTime);
-      console.log(this.duration);
-      if (this.player.src !== undefined) {
-        this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
-        this.player.paused ? this.player.play() : this.player.pause();
-      } 
+      this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
+    }
+  },
+
+  watch: {
+    isPlaying() {
+      this.isPlaying ? this.player.play() : this.player.pause();      
     }
   },
 
   mounted() {
     this.$store.state.sc_player = document.querySelector('audio');
-    this.$store.state.sc_player.src = '';
   }
 }
 </script>
