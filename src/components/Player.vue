@@ -1,7 +1,7 @@
 <template>
   <transition name="player">
     <div v-show="isPlaying" class="player-container" id="player">
-      <audio @timeupdate="updateCurrentTime" ref="audio" :src="streamSrc" autoplay></audio>
+      <audio @timeupdate="updateCurrentTime" ref="audio" :src="streamSrc"></audio>
       
       <div class="track-content">
         <img class="track-image" :src="currentTrack.artwork_url" :alt="currentTrack.title" />
@@ -113,24 +113,6 @@ export default {
       } else {
         this.$refs.progress.value = 0;
       }
-    },
-
-    updatePlayback() {
-      this.$refs.audio.onerror = () => {
-        this.$store.state.current_track.has_error = true;
-        this.$store.state.current_track.is_playing = false;
-      };
-      this.isPlaying ? this.$refs.audio.play() : this.$refs.audio.pause();
-    },
-
-    updateStreamSource() {
-      return this.$store.state.current_track.stream_url !== undefined ? this.$store.state.current_track.stream_url + '?client_id=' + config.SC_CLIENT_ID : '';
-    }
-  },
-
-  watch: {
-    isPlaying() {
-      this.updatePlayback();
     }
   }
 }

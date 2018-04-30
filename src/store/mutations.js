@@ -28,10 +28,22 @@ export default {
   },
 
   SET_CURRENT_TRACK: (state, selection) => {
-    state.tracklist.concat(state.playlist.tracks).forEach(track => {
-      if (track.id !== selection.id) track.is_playing = false
-    });
-    state.current_track = selection;
+    const audio = document.querySelector('audio');
+
+    if (state.current_track.id !== selection.id) {
+      state.current_track.is_playing = false;
+      state.current_track = selection;
+      audio.load();
+    }
+
     state.current_track.is_playing = !state.current_track.is_playing;
+    
+    setTimeout(() => {
+      state.current_track.is_playing ? audio.play() : audio.pause();    
+      audio.onerror = () => {
+        state.current_track.has_error = true;
+        state.current_track.is_playing = false;
+      };
+    }, 10);  
   }
 }
