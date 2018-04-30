@@ -10,7 +10,7 @@
       <playlist-play-icon></playlist-play-icon>
       <grid-icon></grid-icon>
     </button>
-    <div class="filters-container">
+    <div v-click-outside="closeFiltersMenu" class="filters-container">
       <button
         @click="toggleFiltersMenu"
         class="btn"
@@ -24,7 +24,6 @@
       <transition name="filters-menu">
         <ul
           v-if="show_filters"
-          v-click-outside="closeFiltersMenu"
           class="menu-filters"
           id="filters-list"
         >

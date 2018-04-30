@@ -57,7 +57,6 @@
   border-radius: $baseBorderRadius;
   box-shadow: rgba(black, 0.2) 0 2px 6px 0;
   z-index: 300;
-  pointer-events: none;
   
   &:before {
     $size: 12px;
@@ -95,10 +94,6 @@
   }
   
   &.is-active {
-    + .menu-filters {
-      pointer-events: all;
-    }
-
     .material-design-icon {
       transform: rotate(720deg);
     }
