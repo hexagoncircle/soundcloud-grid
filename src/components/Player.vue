@@ -14,7 +14,7 @@
       <div class="track-controls">
         <transition name="progress-loading" mode="out-in">
           <div v-if="loadCurrentTrack" key="1" class="track-loading">
-            Loading track...
+            <loader type="spinner" label="Loading track"></loader><span>Loading track...</span>
           </div>
           <div v-else key="2" class="track-progress">
             <span class="track-current-time">{{currentTime | formatTime}}</span>
@@ -44,6 +44,7 @@
 <script>
 import Button from './Button'
 import Link from './ButtonLink'
+import Loader from './Loader'
 import PlaylistAddIcon from 'vue-material-design-icons/playlist-plus'
 import PlaylistCheckIcon from 'vue-material-design-icons/playlist-check'
 import SoundcloudIcon from 'vue-material-design-icons/soundcloud'
@@ -54,6 +55,7 @@ export default {
   components: {
     'v-button': Button,
     'v-link': Link,
+    Loader,
     PlaylistAddIcon,
     PlaylistCheckIcon,
     SoundcloudIcon,
