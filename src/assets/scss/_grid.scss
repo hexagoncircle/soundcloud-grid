@@ -25,13 +25,13 @@
   
   &:hover {
     @media (hover: hover) {
-       .track {
+       .grid-track {
           opacity: 0.6;
        }
     }
 
-    .track:hover,
-    .track.is-playing {
+    .grid-track:hover,
+    .grid-track.is-playing {
       opacity: 1;
     } 
   }

@@ -1,14 +1,15 @@
 <template>
   <transition name="track">
     <div v-show="show_element" :class="`grid-track ${setGridSpan}${track.is_playing ? ' is-playing' : ''}${track.has_error ? ' has-error' : ''}`">
-      <v-button 
-        @click.native="togglePlayback"
+      <button 
+        @click="togglePlayback"
+        class="btn"
         theme="overlay"
         :title="track.is_playing ? 'Stop playback' : 'Play track'"
         :disabled="track.has_error === true"
       >
         <stop-icon></stop-icon>        
-      </v-button>
+      </button>
       <img
         @error="setPlaceholder"
         @load="imageLoaded"
@@ -21,13 +22,11 @@
 </template>
 
 <script>
-import Button from './Button'
 import StopIcon from 'vue-material-design-icons/stop-circle-outline'
 
 export default {
   name: 'GridTrack',
   components: {
-    'v-button': Button,
     StopIcon
   },
   props: ['track'],

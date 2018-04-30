@@ -11,25 +11,23 @@
       </div>
     </transition>
     <div class="track-buttons">
-      <v-button @click.native="togglePlayback" theme="dark" title="Stop playback">
+      <button @click="togglePlayback" class="btn" theme="dark" title="Stop playback">
         <stop-icon></stop-icon>        
-      </v-button>
-      <v-button v-if="inPlaylist" @click.native="removeFromPlaylist" theme="dark" title="Remove this track from the playlist">
+      </button>
+      <button v-if="inPlaylist" @click="removeFromPlaylist" class="btn" theme="dark" title="Remove this track from the playlist">
         <playlist-check-icon></playlist-check-icon>
-      </v-button>
-      <v-button v-else @click.native="addToPlaylist" theme="dark" title="Add this track to the playlist">
+      </button>
+      <button v-else @click="addToPlaylist" class="btn" theme="dark" title="Add this track to the playlist">
         <playlist-add-icon></playlist-add-icon>
-      </v-button>
-      <v-link @click.native="togglePlayback" :href="currentTrack.permalink_url" target="_blank" theme="dark" title="Open this track on SoundCloud">
+      </button>
+      <a @click="togglePlayback" :href="currentTrack.permalink_url" target="_blank" class="btn" theme="dark" title="Open this track on SoundCloud">
         <soundcloud-icon></soundcloud-icon>
-      </v-link>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
-import Button from './Button'
-import Link from './ButtonLink'
 import Loader from './Loader'
 import PlaylistAddIcon from 'vue-material-design-icons/playlist-plus'
 import PlaylistCheckIcon from 'vue-material-design-icons/playlist-check'
@@ -39,8 +37,6 @@ import StopIcon from 'vue-material-design-icons/stop-circle-outline'
 export default {
   name: 'PlayerControls',
   components: {
-    'v-button': Button,
-    'v-link': Link,
     Loader,
     PlaylistAddIcon,
     PlaylistCheckIcon,

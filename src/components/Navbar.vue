@@ -1,24 +1,26 @@
 <template>
   <nav id="app-controls" class="navbar">
-    <v-button
-      @click.native="togglePlaylist"
+    <button
+      @click="togglePlaylist"
       id="playlist-toggle"
+      class="btn"
       theme="light"
       :title="viewPlaylist ? 'Hide playlist' : 'Show playlist'"
     >
       <playlist-play-icon></playlist-play-icon>
       <grid-icon></grid-icon>
-    </v-button>
+    </button>
     <div class="filters-container">
-      <v-button
-        @click.native="toggleFiltersMenu"
+      <button
+        @click="toggleFiltersMenu"
+        class="btn"
         :class="{'is-active' : show_filters}"
         id="filters-toggle"
         theme="light"
         title="Select a filter"
       >
         <settings-icon></settings-icon>
-      </v-button>
+      </button>
       <transition name="filters-menu">
         <ul
           v-if="show_filters"
@@ -52,20 +54,20 @@
         :placeholder="searchPlaceholder"
         :data-filter-type="searchFilterType"
       />
-      <v-button
-        @click.native="searchTracks"
+      <button
+        @click="searchTracks"
+        class="btn"
         theme="primary"
         :disabled="!searchValue || loading"
         :title="searchValue ? 'Click to search for ' + searchValue : 'Enter a search value'"
       >
         <magnify-icon></magnify-icon>
-      </v-button>
+      </button>
     </div>
   </nav>
 </template>
 
 <script>
-import Button from './Button'
 import GridIcon from 'vue-material-design-icons/view-grid'
 import MagnifyIcon from 'vue-material-design-icons/magnify'
 import PlaylistPlayIcon from 'vue-material-design-icons/playlist-play'
@@ -74,7 +76,6 @@ import SettingsIcon from 'vue-material-design-icons/settings'
 export default {
   name: 'Navbar',
   components: {
-    'v-button': Button,
     GridIcon,
     MagnifyIcon,
     PlaylistPlayIcon,

@@ -4,10 +4,11 @@
 .grid-track {
   grid-column: span 1;
   grid-row: span 1;
+  width: 100%;
+  color: black;
+  backface-visibility: hidden;
   z-index: 1;
   opacity: 1;
-  width: 100%;
-  backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
   transition: 
     opacity ($baseTransSpeed * 1.5) ease-out,
@@ -64,8 +65,9 @@
     transition: transform 0s;
   }
 
-  .btn-overlay {
-    z-index: 1;    
+  .btn[theme="overlay"] {
+    z-index: 1;
+    transform: translateZ(0);
     transition: background-color ($baseTransSpeed / 2) ease-out;
 
     .material-design-icon {
@@ -92,7 +94,7 @@
     transition: transform 0s;
   }
 
-  .btn-overlay {
+  .btn[theme="overlay"] {
     opacity: 1;
     background-color: rgba($orange, 0.8);
 

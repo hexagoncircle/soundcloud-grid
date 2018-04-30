@@ -12,28 +12,12 @@
   text-transform: uppercase;
   font-family: $baseFont;
   font-size: 0.8em;
+  color: inherit;
   border: none;
   border-radius: $baseBorderRadius;
   transition: 
     color $baseTransSpeed/1.5 $transTimeFuncEase,
     background-color $baseTransSpeed/1.5 $transTimeFuncEase;
-  
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:disabled {
-    cursor: initial;
-    @include btn-colors(darken($darkgray, 20%), $darkgray);
-
-    &:active { transform: translateY(0); }
-    &:hover { background-color: $darkgray; }
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
 
   .material-design-icon {
     pointer-events: none;
@@ -50,35 +34,48 @@
     height: 100%;
     fill: currentColor;
   }
-}
 
-.btn-primary {
-  @include btn-colors(white, $orange);
-}
-
-.btn-light {
-  @include btn-colors(black, $lightgray);
-}
-
-.btn-dark {
-  @include btn-colors($gray, transparent, $orange);
-}
-
-// Track actions
-.btn-overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+  &[theme="primary"] {
+    @include btn-colors(white, $orange);
+  }
   
-  [class*="icon"] {
-    width: 75%;
-    height: 75%;
+  &[theme="light"] {
+    @include btn-colors(black, $lightgray);
+  }
+  
+  &[theme="dark"] {
+    @include btn-colors($gray, transparent, $orange);
+  }
+  
+  // Track actions
+  &[theme="overlay"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    
+    [class*="icon"] {
+      width: 75%;
+      height: 75%;
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    cursor: initial;
+    @include btn-colors(darken($darkgray, 20%), $darkgray);
+
+    &:active { transform: translateY(0); }
+    &:hover { background-color: $darkgray; }
   }
 }
