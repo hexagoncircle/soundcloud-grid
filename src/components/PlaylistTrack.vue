@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import Button from './Button'
-import Link from './ButtonLink'
 import PlayIcon from 'vue-material-design-icons/play'
 import PlaylistRemoveIcon from 'vue-material-design-icons/playlist-remove'
 import SoundcloudIcon from 'vue-material-design-icons/soundcloud'
@@ -33,8 +31,6 @@ import StopIcon from 'vue-material-design-icons/stop-circle-outline'
 export default {
   name: 'PlaylistTrack',
   components: {
-    'v-button': Button,
-    'v-link': Link,
     PlayIcon,
     PlaylistRemoveIcon,
     SoundcloudIcon,
