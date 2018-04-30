@@ -92,6 +92,7 @@
 .track-controls {
   display: inline-flex;
   align-items: center;
+  justify-content: flex-end;
   white-space: nowrap;
   margin: (-$basePadding) (-$basePadding) (-$basePadding / 2);
   
@@ -124,6 +125,7 @@
   }
 }
 
+.track-loading,
 .track-progress {
   flex: 1;
   display: flex;
@@ -137,7 +139,6 @@
 
 .track-progress-bar {
   flex: 1;
-  appearance: none;
   margin: 0 $basePadding;  
   height: 2px;
   width: 100%;

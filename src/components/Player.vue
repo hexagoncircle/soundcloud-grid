@@ -1,7 +1,7 @@
 <template>
   <transition name="player">
     <div v-show="isPlaying" class="player-container" id="player">
-      <audio @timeupdate="updateCurrentTime" ref="audio" :src="streamSrc"></audio>
+      <audio @canplaythrough="trackLoaded" @timeupdate="updateCurrentTime" ref="audio" :src="streamSrc"></audio>
       
       <div class="track-content">
         <img class="track-image" :src="currentTrack.artwork_url" :alt="currentTrack.title" />
@@ -12,11 +12,16 @@
       </div>
 
       <div class="track-controls">
-        <div class="track-progress">
-          <span class="track-current-time">{{currentTime | formatTime}}</span>
-          <progress ref="progress" class="track-progress-bar" value="0" max="1"></progress>
-          <span class="track-duration">{{duration | formatTime}}</span>
-        </div>
+        <transition name="progress-loading" mode="out-in">
+          <div v-if="loadCurrentTrack" key="1" class="track-loading">
+            Loading track...
+          </div>
+          <div v-else key="2" class="track-progress">
+            <span class="track-current-time">{{currentTime | formatTime}}</span>
+            <progress ref="progress" class="track-progress-bar" value="0" max="1"></progress>
+            <span class="track-duration">{{duration | formatTime}}</span>
+          </div>
+        </transition>
         <div class="track-buttons">
           <v-button @click.native="togglePlayback" theme="dark" title="Stop playback">
             <stop-icon></stop-icon>        
@@ -80,6 +85,10 @@ export default {
       return this.$store.getters.checkPlaylist;
     },
 
+    loadCurrentTrack() {
+      return this.$store.getters.loadCurrentTrack;
+    },
+
     streamSrc() {
       return this.$store.getters.getStreamSource;
     }
@@ -110,9 +119,11 @@ export default {
       this.$store.state.current_track.current_time = this.$refs.audio.currentTime * 1000;
       if (this.$refs.audio.duration) {
         this.$refs.progress.value = this.$refs.audio.currentTime / this.$refs.audio.duration;
-      } else {
-        this.$refs.progress.value = 0;
       }
+    },
+
+    trackLoaded() {
+      this.$store.state.loading_current_track = false;
     }
   }
 }

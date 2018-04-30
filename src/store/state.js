@@ -2,7 +2,8 @@ import placeholder from '../assets/images/track-placeholder.png'
 
 export default {
   current_track: {},
-  loading: true,
+  loading_content: false,
+  loading_current_track: false,
   placeholder: placeholder,
   playlist: {
     title: 'Current Playlist',

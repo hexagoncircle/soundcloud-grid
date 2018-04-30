@@ -1,6 +1,6 @@
 export default {
   fetchTracks({commit}, type = '') {
-    this.state.loading = true;
+    this.state.loading_content = true;
     
     if (this.state.search.filter_type === 'genre') {
       this.state.sc_options.genres = type
@@ -24,7 +24,7 @@ export default {
 
       this.state.search.static_value = this.state.search.value;
       this.state.tracklist = results;
-      this.state.loading = false;
+      this.state.loading_content = false;
     }).catch(error => {
       // console.log(error);
     });

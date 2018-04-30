@@ -29,8 +29,11 @@ export default {
 
   SET_CURRENT_TRACK: (state, selection) => {
     const audio = document.querySelector('audio');
+    const progress = document.querySelector('progress');
 
     if (state.current_track.id !== selection.id) {
+      state.loading_current_track = true;
+      if (progress) progress.value = 0;
       state.current_track.is_playing = false;
       state.current_track = selection;
       audio.load();

@@ -51,3 +51,16 @@
   transform: translateY(-6px);
   opacity: 0;
 }
+
+.progress-loading-enter-active,
+.progress-loading-leave-active {
+  transition: 
+    transform 0.4s $transTimeFuncEase,
+    opacity 0.4s $transTimeFuncEase;
+}
+
+.progress-loading-enter,
+.progress-loading-leave-to {
+  transform: translateY(2px);
+  opacity: 0;
+}
