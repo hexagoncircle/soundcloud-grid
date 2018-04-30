@@ -11,7 +11,7 @@ export default {
   },
   sc_options: {
     kind: 'trending',
-    limit: 100
+    limit: 200
   },
   search: {
     filter_type: 'genre',
