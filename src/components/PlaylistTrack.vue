@@ -6,18 +6,18 @@
       <span class="track-info-username">{{track.user.username}}</span>
     </div>
     <div class="track-controls">
-      <v-button @click.native="togglePlayback" v-if="track.is_playing" theme="dark" title="Stop playback">
+      <button @click="togglePlayback" v-if="track.is_playing" class="btn" theme="dark" title="Stop playback">
         <stop-icon></stop-icon>
-      </v-button>
-      <v-button @click.native="togglePlayback" v-else theme="dark" title="Play track">
+      </button>
+      <button @click="togglePlayback" v-else class="btn" theme="dark" title="Play track">
         <play-icon></play-icon>
-      </v-button>
-      <v-button @click.native="removeFromPlaylist" theme="dark" title="Remove this track from the playlist">
+      </button>
+      <button @click="removeFromPlaylist" class="btn" theme="dark" title="Remove this track from the playlist">
         <playlist-remove-icon></playlist-remove-icon>
-      </v-button>
-      <v-link @click.native="togglePlayback" :href="track.permalink_url" target="_blank" theme="dark" title="Open this track on SoundCloud">
+      </button>
+      <a @click="togglePlayback" :href="track.permalink_url" class="btn" target="_blank" theme="dark" title="Open this track on SoundCloud">
         <soundcloud-icon></soundcloud-icon>
-      </v-link>
+      </a>
     </div>
   </li>
 </template>
