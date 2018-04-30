@@ -119,7 +119,7 @@ export default {
     
     updateCurrentTime() {
       this.$store.state.current_track.current_time = this.$refs.audio.currentTime * 1000;
-      if (this.$refs.audio.duration) {
+      if (this.$refs.audio.duration > 0 && this.$refs.progress) {
         this.$refs.progress.value = this.$refs.audio.currentTime / this.$refs.audio.duration;
       }
     },

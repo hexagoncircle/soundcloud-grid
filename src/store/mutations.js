@@ -47,6 +47,6 @@ export default {
         state.current_track.has_error = true;
         state.current_track.is_playing = false;
       };
-    }, 10);  
+    }, 100);  
   }
 }
