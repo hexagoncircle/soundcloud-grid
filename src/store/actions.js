@@ -14,7 +14,8 @@ export default {
       let results = [];
 
       tracks.forEach(track => {
-        track.current_time = 0;  
+        track.current_time = 0;
+        track.progress = 0;        
         track.has_error = false;             
         track.is_playing = false;
         track.in_playlist = false;

@@ -33,14 +33,6 @@ export default {
       return this.$store.getters.getCurrentTrack;
     },
 
-    currentTime() {
-      return this.$store.getters.getCurrentTime;
-    },
-
-    duration() {
-      return this.$store.getters.getDuration;
-    },
-
     hasError() {
       return this.$store.getters.hasError;
     },
@@ -49,44 +41,16 @@ export default {
       return this.$store.getters.checkPlayback;
     },
 
-    inPlaylist() {
-      return this.$store.getters.checkPlaylist;
-    },
-
-    loadCurrentTrack() {
-      return this.$store.getters.loadCurrentTrack;
-    },
-
     streamSrc() {
       return this.$store.getters.getStreamSource;
     }
   },
 
-  filters: {
-    formatTime(ms) {
-      var mins = Math.floor(ms / 60000);
-      var secs = (Math.floor(ms % 60000 / 1000) < 10 ? '0' : '') + Math.floor(ms % 60000 / 1000);
-      return mins + ':' + secs;
-    }
-  },
-
   methods: {
-    addToPlaylist() {
-      this.$store.commit('ADD_TO_PLAYLIST', this.currentTrack);
-    },
-
-    removeFromPlaylist() {
-      this.$store.commit('REMOVE_FROM_PLAYLIST', this.currentTrack);
-    },
-
-    togglePlayback() {
-      this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
-    },
-    
     updateCurrentTime() {
       this.$store.state.current_track.current_time = this.$refs.audio.currentTime * 1000;
-      if (this.$refs.audio.duration > 0 && this.$refs.progress) {
-        this.$refs.progress.value = this.$refs.audio.currentTime / this.$refs.audio.duration;
+      if (this.$refs.audio.duration > 0) {
+        this.$store.state.current_track.progress = this.$refs.audio.currentTime / this.$refs.audio.duration;
       }
     },
 

@@ -6,7 +6,7 @@
       </div>
       <div v-else key="2" class="track-progress">
         <span class="track-current-time">{{currentTime | formatTime}}</span>
-        <progress ref="progress" class="track-progress-bar" value="0" max="1"></progress>
+        <progress ref="progress" class="track-progress-bar" :value="progress" max="1"></progress>
         <span class="track-duration">{{duration | formatTime}}</span>
       </div>
     </transition>
@@ -20,7 +20,7 @@
       <button v-else @click="addToPlaylist" class="btn" theme="dark" title="Add this track to the playlist">
         <playlist-add-icon></playlist-add-icon>
       </button>
-      <a @click="togglePlayback" :href="currentTrack.permalink_url" target="_blank" class="btn" theme="dark" title="Open this track on SoundCloud">
+      <a @click="stopPlayback" :href="permalink" target="_blank" class="btn" theme="dark" title="Open this track on SoundCloud">
         <soundcloud-icon></soundcloud-icon>
       </a>
     </div>
@@ -45,10 +45,6 @@ export default {
   },
   
   computed: {
-    currentTrack() {
-      return this.$store.getters.getCurrentTrack;
-    },
-
     currentTime() {
       return this.$store.getters.getCurrentTime;
     },
@@ -67,6 +63,14 @@ export default {
 
     loadCurrentTrack() {
       return this.$store.getters.loadCurrentTrack;
+    },
+
+    permalink() {
+      return this.$store.getters.getSoundCloudLink;
+    },
+
+    progress() {
+      return this.$store.getters.getTrackProgress;
     }
   },
 
@@ -90,9 +94,9 @@ export default {
     togglePlayback() {
       this.$store.commit('SET_CURRENT_TRACK', this.currentTrack);
     },
-
-    trackLoaded() {
-      this.$store.state.loading_current_track = false;
+    
+    stopPlayback() {
+      if (this.isPlaying) this.$store.state.current_track.is_playing = false;
     }
   }
 }
