@@ -13,6 +13,7 @@
     "browser-sync": "^2.24.1",
     "v-click-outside": "^1.0.4",
     "vue": "^2.5.2",
+    "vue-clazy-load": "^0.4.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
