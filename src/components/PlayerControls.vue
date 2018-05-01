@@ -49,6 +49,10 @@ export default {
       return this.$store.getters.getCurrentTime;
     },
 
+    currentTrack() {
+      return this.$store.getters.getCurrentTrack;
+    },
+
     duration() {
       return this.$store.getters.getDuration;
     },
@@ -83,6 +87,9 @@ export default {
   },
 
   methods: {
+    currentTrack() {
+      return this.$store.getters.getCurrentTrack;
+    },
     addToPlaylist() {
       this.$store.commit('ADD_TO_PLAYLIST', this.currentTrack);
     },
