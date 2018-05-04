@@ -1,9 +1,9 @@
 <template>
   <section class="playlist-container">
-    <div v-if="playlist.tracks.length > 0" class="playlist-content">
+    <div v-if="playlist.length > 0" class="playlist-content">
       <h2 class="playlist-title">{{playlist.title}}</h2>
       <ul id="playlist" class="playlist">
-        <playlist-track v-for="track in playlist.tracks" :key="`playlist-${track.id}`" :track="track"></playlist-track>
+        <playlist-track v-for="track in playlist" :key="`playlist-${track.id}`" :track="track"></playlist-track>
       </ul>
     </div>
     <div v-else class="empty-state-container">
@@ -24,7 +24,7 @@ export default {
   
   computed: {
     playlist() {
-      return this.$store.state.playlist;
+      return this.$store.getters.playlist;
     }
   },
 }

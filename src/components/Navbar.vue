@@ -49,7 +49,7 @@
         ref="search"
         class="track-filter-input"
         type="text"
-        :disabled="loading"
+        :disabled="loadingContent"
         :placeholder="searchPlaceholder"
         :data-filter-type="searchFilterType"
       />
@@ -71,6 +71,7 @@ import GridIcon from 'vue-material-design-icons/view-grid'
 import MagnifyIcon from 'vue-material-design-icons/magnify'
 import PlaylistPlayIcon from 'vue-material-design-icons/playlist-play'
 import SettingsIcon from 'vue-material-design-icons/settings'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Navbar',
@@ -94,30 +95,13 @@ export default {
   },
 
   computed: {
-    loading() {
-      return this.$store.state.loading;
-    },
-
-    searchFilterType() {
-      return this.$store.state.search.filter_type;
-    },
-
-    searchPlaceholder() {
-      return this.$store.state.search.placeholder;
-    },
-
-    searchValue: {
-      get() {
-        return this.$store.state.search.value;
-      },
-      set(value) {
-        this.$store.state.search.value = value;
-      }
-    },
-
-    viewPlaylist() {
-      return this.$store.state.view_playlist;
-    }
+    ...mapGetters([
+      'loadingContent',
+      'searchFilterType',
+      'searchPlaceholder',
+      'searchValue',
+      'viewPlaylist'
+    ])
   },
 
   methods: {

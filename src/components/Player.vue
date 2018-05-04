@@ -3,7 +3,7 @@
     <div v-show="isPlaying" class="player-container" id="player">
       <audio
         ref="audio"
-        :src="streamSrc"
+        :src="streamSource"
         @canplaythrough="trackLoaded"
         @timeupdate="updateCurrentTime"
       ></audio>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import PlayerControls from './PlayerControls'
 
 export default {
@@ -29,21 +30,12 @@ export default {
   },
   
   computed: {
-    currentTrack() {
-      return this.$store.getters.getCurrentTrack;
-    },
-
-    hasError() {
-      return this.$store.getters.hasError;
-    },
-
-    isPlaying() {
-      return this.$store.getters.checkPlayback;
-    },
-
-    streamSrc() {
-      return this.$store.getters.getStreamSource;
-    }
+    ...mapGetters([
+      'currentTrack',
+      'hasError',
+      'isPlaying',
+      'streamSource'
+    ])
   },
 
   methods: {

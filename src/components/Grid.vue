@@ -1,17 +1,17 @@
 <template>
   <section id="grid" class="track-grid">
-    <div v-if="loading" class="empty-state-container">
+    <div v-if="loadingContent" class="empty-state-container">
       <loader type="tiles" label="Fetching tracks"></loader>
       <h3>Fetching tracks...</h3>
     </div>
     <grid-track
-      v-if="!loading"
-      v-for="track in tracks"
+      v-if="!loadingContent"
+      v-for="track in tracklist"
       :key="`grid-${track.id}`"
       :track="track"
     />
-    <div v-if="!loading && tracks.length === 0" class="empty-state-container">
-      <h3>There are no results for {{searchValue}}.</h3>
+    <div v-if="!loadingContent && tracklist.length === 0" class="empty-state-container">
+      <h3>There are no results for {{searchValueStatic}}.</h3>
       <p>Check your spelling, simplify your search terms, or try searching for something else.</p>
     </div>
   </section>
@@ -20,6 +20,7 @@
 <script>
 import GridTrack from './GridTrack'
 import Loader from './Loader'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Grid',
@@ -29,17 +30,11 @@ export default {
   },
 
   computed: {
-    loading() {
-      return this.$store.state.loading_content;
-    },
-
-    searchValue() {
-      return this.$store.state.search.static_value;
-    },
-
-    tracks() {
-      return this.$store.state.tracklist;
-    }
+    ...mapGetters([
+      'loadingContent',
+      'searchValueStatic',
+      'tracklist'
+    ])
   },
   
   created() {
