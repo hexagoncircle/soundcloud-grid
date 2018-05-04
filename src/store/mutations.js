@@ -26,6 +26,12 @@ export default {
     if (state.current_track.id === selection.id) state.current_track.in_playlist = false;    
   },
 
+  SELECT_FILTER: (state, type) => {
+    state.search.filter_type = type;
+    state.search.value = '';
+    state.search.placeholder = `Enter a ${type}`;
+  },
+
   SET_CURRENT_TRACK: (state, selection) => {
     const audio = document.querySelector('audio');
     const progress = document.querySelector('progress');
@@ -47,5 +53,9 @@ export default {
         state.current_track.is_playing = false;
       };
     }, 100);  
+  },
+
+  UPDATE_SEARCH_VALUE: (state, value) => {
+    state.search.value = value;
   }
 }

@@ -44,11 +44,12 @@
       <label class="track-filter-label" for="search-tracks">Search</label>
       <input
         @keyup.enter="searchTracks"
-        v-model="searchValue"
+        @input="updateSearchValue"
         id="search-tracks"
         ref="search"
         class="track-filter-input"
         type="text"
+        :value="searchValue"        
         :disabled="loadingContent"
         :placeholder="searchPlaceholder"
         :data-filter-type="searchFilterType"
@@ -57,7 +58,7 @@
         @click="searchTracks"
         class="btn"
         theme="primary"
-        :disabled="!searchValue || loading"
+        :disabled="!searchValue || loadingContent"
         :title="searchValue ? 'Click to search for ' + searchValue : 'Enter a search value'"
       >
         <magnify-icon></magnify-icon>
@@ -72,6 +73,7 @@ import MagnifyIcon from 'vue-material-design-icons/magnify'
 import PlaylistPlayIcon from 'vue-material-design-icons/playlist-play'
 import SettingsIcon from 'vue-material-design-icons/settings'
 import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Navbar',
@@ -98,10 +100,10 @@ export default {
     ...mapGetters([
       'loadingContent',
       'searchFilterType',
-      'searchPlaceholder',
       'searchValue',
+      'searchPlaceholder',
       'viewPlaylist'
-    ])
+    ]),
   },
 
   methods: {
@@ -117,18 +119,20 @@ export default {
       this.$store.state.view_playlist = !this.$store.state.view_playlist;
     },
 
-    selectFilter(event, type) {
-      event.preventDefault();
-      this.$store.state.search.filter_type = type;
-      this.$store.state.search.value = '';
-      this.$store.state.search.placeholder = `Enter a ${type}`;
-      this.$refs.search.focus();
+    selectFilter(e, type) {
+      e.preventDefault();
+      this.$store.commit('SELECT_FILTER', type);
       this.selected_filter = type;
+      this.$refs.search.focus();      
       this.closeFiltersMenu();
     },
 
     searchTracks() {
       this.$store.dispatch('fetchTracks', this.$store.state.search.value);
+    },
+
+    updateSearchValue(e) {
+      this.$store.commit('UPDATE_SEARCH_VALUE', e.target.value);
     }
   }
 }
