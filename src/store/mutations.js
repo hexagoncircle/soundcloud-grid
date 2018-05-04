@@ -20,11 +20,10 @@ export default {
 
   REMOVE_FROM_PLAYLIST: (state, selection) => {
     state.playlist.tracks.forEach((track, index) => {
-      if (track.id === selection.id) {
-        state.playlist.tracks.splice(index, 1);
-        state.current_track.in_playlist = false;
-      }
+      if (track.id === selection.id) state.playlist.tracks.splice(index, 1);
     });
+
+    if (state.current_track.id === selection.id) state.current_track.in_playlist = false;    
   },
 
   SET_CURRENT_TRACK: (state, selection) => {
