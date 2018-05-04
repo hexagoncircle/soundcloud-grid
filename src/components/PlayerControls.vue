@@ -20,7 +20,7 @@
       <button v-else @click="addToPlaylist" class="btn" theme="dark" title="Add this track to the playlist">
         <playlist-add-icon></playlist-add-icon>
       </button>
-      <a @click="stopPlayback" :href="soundcloudUrl" target="_blank" class="btn" theme="dark" title="Open this track on SoundCloud">
+      <a @click="stopPlayback" :href="soundcloudUrl" class="btn" theme="dark" target="_blank" rel="noopener" title="Open this track on SoundCloud">
         <soundcloud-icon></soundcloud-icon>
       </a>
     </div>

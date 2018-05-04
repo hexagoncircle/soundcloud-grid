@@ -15,7 +15,7 @@
       <button @click="removeFromPlaylist" class="btn" theme="dark" title="Remove this track from the playlist">
         <playlist-remove-icon></playlist-remove-icon>
       </button>
-      <a @click="togglePlayback" :href="track.permalink_url" class="btn" target="_blank" theme="dark" title="Open this track on SoundCloud">
+      <a @click="togglePlayback" :href="track.permalink_url" class="btn" theme="dark" target="_blank" rel="noopener" title="Open this track on SoundCloud">
         <soundcloud-icon></soundcloud-icon>
       </a>
     </div>
