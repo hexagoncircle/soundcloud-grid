@@ -18,7 +18,7 @@ export default {
     track.in_playlist = false;
   },
 
-  SEARCH_TRACKS_BY_TYPE: (state, type) => {
+  FETCH_TRACKS: (state, type) => {
     state.loading_content = true;
     
     if (state.search.filter_type === 'genre') {
@@ -30,10 +30,6 @@ export default {
     }
   },
 
-  PUSH_TO_TRACKLIST: (state, tracks) => {
-    state.tracklist = tracks;   
-  },
-
   OPTIMIZE_TRACK_IMAGE: (state, track) => {
     if (track.artwork_url !== null) {
       track.artwork_url = track.artwork_url.replace('large', 't500x500');
@@ -41,6 +37,8 @@ export default {
       track.artwork_url = track.user.avatar_url.replace('large', 't500x500');
     }
   },
+
+  PUSH_TO_TRACKLIST: (state, tracks) => state.tracklist = tracks,
 
   REMOVE_FROM_PLAYLIST: (state, selection) => {
     state.playlist.tracks.forEach((track, index) => {
@@ -79,12 +77,12 @@ export default {
     }, 100);  
   },
 
+  SET_IMAGE_PLACEHOLDER: (state, track) => track.artwork_url = state.placeholder,
+
   SHOW_TRACKLIST: (state, tracks) => {
     state.search.static_value = state.search.value;
     state.loading_content = false;
   },
 
-  UPDATE_SEARCH_VALUE: (state, value) => {
-    state.search.value = value;
-  }
+  UPDATE_SEARCH_VALUE: (state, value) => state.search.value = value
 }

@@ -2,7 +2,7 @@ import { config } from '../../app-config'
 
 export default {
   fetchTracks({commit}, type = '') {
-    commit('SEARCH_TRACKS_BY_TYPE', type);
+    commit('FETCH_TRACKS', type);
 
     SC.get('/tracks', this.state.sc_options).then(tracks => {
       let results = [];

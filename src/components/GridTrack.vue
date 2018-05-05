@@ -50,7 +50,7 @@ export default {
     },
 
     setPlaceholder() {
-      this.track.artwork_url = this.$store.state.placeholder;
+      this.$store.commit('SET_IMAGE_PLACEHOLDER', this.track);
     },
 
     togglePlayback() {
