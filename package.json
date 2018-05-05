@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "deploy": "node ./node_modules/vue-gh-pages/index.js",
-    "homepage": "https://github.com/hexagoncircle/soundcloud-grid"
+    "homepage": "git@github.com:hexagoncircle/soundcloud-grid"
   },
   "dependencies": {
     "browser-sync": "^2.24.1",
