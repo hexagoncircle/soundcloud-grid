@@ -13,6 +13,12 @@
   transition: 
     opacity ($baseTransSpeed * 1.5) ease-out,
     transform $baseTransSpeed $transTimeFuncBounce;
+
+  &:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
   
   &.is-loading {
     opacity: 0;
@@ -28,7 +34,7 @@
       $darkgraytint 10px
     );
     
-    &:after {
+    &:before {
       content: 'Cannot load track';
       position: absolute;
       top: 0; left: 0;
