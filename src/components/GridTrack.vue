@@ -9,26 +9,40 @@
       >
         <stop-icon></stop-icon>        
       </button>
-      <transition name="fade">
-        <img
-          v-show="show_image"
-          @error="setPlaceholder"
-          @load="imageLoaded"
-          :src="track.artwork_url"
-          :alt="`Album art for ${track.title}`"
-          class="track-image"        
-        />
-      </transition>
+      <vue-clazy-load :src="track.artwork_url">
+        <transition name="fade">
+          <img
+            v-show="show_image"
+            @load="imageLoaded"
+            :src="track.artwork_url"
+            :alt="`Album art for ${track.title}`"
+            class="track-image"        
+          />
+        </transition>
+        <div slot="placeholder">
+          <transition name="fade">
+            <img 
+              v-show="show_image"
+              @error="setPlaceholder"
+              :src="track.artwork_url"
+              class="track-image placeholder-image"
+              :alt="`Placeholder image for ${track.title}`"
+            />
+          </transition>
+        </div>
+      </vue-clazy-load>
     </div>
 </template>
 
 <script>
 import StopIcon from 'vue-material-design-icons/stop-circle-outline'
+import { VueClazyLoad } from 'vue-clazy-load'
 
 export default {
   name: 'GridTrack',
   components: {
-    StopIcon
+    StopIcon,
+    VueClazyLoad
   },
   props: ['track'],
 
@@ -41,7 +55,7 @@ export default {
   computed: {
     setGridSpan() {
       return 'span-' + Math.floor(Math.random() * 2 + 1);
-    }
+    },
   },
   
   methods: {
@@ -51,6 +65,7 @@ export default {
 
     setPlaceholder() {
       this.$store.commit('SET_IMAGE_PLACEHOLDER', this.track);
+      this.imageLoaded();
     },
 
     togglePlayback() {
