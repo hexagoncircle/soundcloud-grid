@@ -1,12 +1,13 @@
 // ================================================
 // Transitions
 // ================================================
-.track-enter-active,
-.track-leave-active {
-  transition: opacity 0.8s 0.2s $transTimeFuncEase;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s $transTimeFuncEase;
 }
-.track-enter,
-.track-leave-to {
+
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 

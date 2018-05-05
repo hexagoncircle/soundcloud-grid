@@ -1,15 +1,12 @@
 <template>
-  <section id="grid" class="track-grid">
+  <section class="track-grid-container">
     <div v-if="loadingContent" class="empty-state-container">
       <loader type="tiles" label="Fetching tracks"></loader>
       <h3>Fetching tracks...</h3>
     </div>
-    <grid-track
-      v-if="!loadingContent"
-      v-for="track in tracklist"
-      :key="`grid-${track.id}`"
-      :track="track"
-    />
+    <div v-else id="grid" class="track-grid">
+      <grid-track v-for="track in tracklist" :key="`grid-${track.id}`" :track="track" />
+    </div>
     <div v-if="!loadingContent && tracklist.length === 0" class="empty-state-container">
       <h3>There are no results for {{searchValueStatic}}.</h3>
       <p>Check your spelling, simplify your search terms, or try searching for something else.</p>

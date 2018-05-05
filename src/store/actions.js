@@ -1,3 +1,5 @@
+import { config } from '../../app-config'
+
 export default {
   fetchTracks({commit}, type = '') {
     commit('SEARCH_TRACKS_BY_TYPE', type);
@@ -18,5 +20,9 @@ export default {
     }).catch(error => {
       // console.log(error);
     });
+  },
+
+  initSoundCloud({commit}) {
+    SC.initialize({ client_id: config.SC_CLIENT_ID })
   }
 }

@@ -1,6 +1,5 @@
 <template>
-  <transition name="track">
-    <div v-show="show_element" :class="`grid-track ${setGridSpan}${track.is_playing ? ' is-playing' : ''}${track.has_error ? ' has-error' : ''}`">
+    <div :class="`grid-track ${setGridSpan}${track.is_playing ? ' is-playing' : ''}${track.has_error ? ' has-error' : ''}`">
       <button 
         @click="togglePlayback"
         class="btn"
@@ -10,15 +9,17 @@
       >
         <stop-icon></stop-icon>        
       </button>
-      <img
-        @error="setPlaceholder"
-        @load="imageLoaded"
-        :src="track.artwork_url"
-        :alt="`Album art for ${track.title}`"
-        class="track-image"        
-      />
+      <transition name="fade">
+        <img
+          v-show="show_image"
+          @error="setPlaceholder"
+          @load="imageLoaded"
+          :src="track.artwork_url"
+          :alt="`Album art for ${track.title}`"
+          class="track-image"        
+        />
+      </transition>
     </div>
-  </transition>  
 </template>
 
 <script>
@@ -33,7 +34,7 @@ export default {
 
   data() {
     return {
-      show_element: false
+      show_image: false
     }
   },
 
@@ -45,7 +46,7 @@ export default {
   
   methods: {
     imageLoaded() {
-      this.show_element = true;
+      this.show_image = true;
     },
 
     setPlaceholder() {

@@ -15,7 +15,6 @@ import Grid from './components/Grid'
 import Navbar from './components/Navbar'
 import Playlist from './components/Playlist'
 import Player from './components/Player'
-import { config } from '../app-config'
 
 export default {
   name: 'App',
@@ -29,12 +28,6 @@ export default {
   methods: {
     closePlaylist() {
       this.$store.state.view_playlist = false;
-    },
-
-    initSoundCloud() {
-      SC.initialize({
-        client_id: config.SC_CLIENT_ID
-      });
     }
   },
 
@@ -54,7 +47,7 @@ export default {
   },
 
   created() {
-    this.initSoundCloud();
+    this.$store.dispatch('initSoundCloud');
   }
 }
 </script>
