@@ -6,6 +6,7 @@ export default {
   currentTrack: (state) => state.current_track,
   currentTime: (state) => state.current_track.current_time,
   duration: (state) => state.current_track.duration,
+  placeholder: (state) => state.placeholder,
   playlist: (state) => state.playlist.tracks,
   streamSource: (state) => state.current_track.stream_url !== undefined ? state.current_track.stream_url + '?client_id=' + config.SC_CLIENT_ID : '',
   soundcloudUrl: (state) => state.current_track.permalink_url,  
