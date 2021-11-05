@@ -2,7 +2,7 @@
 
 *This is a work-in-progress*
 
-http://hexagoncircle.com/soundcloud-grid/
+http://hexagoncircle.github.io/soundcloud-grid/
 
 Soundcloud API-based application that plays tracks, searches content, and creates playlists.
 
